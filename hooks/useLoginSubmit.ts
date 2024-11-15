@@ -1,5 +1,6 @@
 import { LoginSchemaType } from "@/Auth/Schema/LoginSchema";
 import { successResponse } from "@/Auth/types/common";
+import AuthServices from "@/services/AuthServices";
 // import UserServices from "@/services/UserServices";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
@@ -15,10 +16,10 @@ const useLoginSubmit = () => {
     const newPromise: Promise<successResponse> = new Promise(
       async (resolve, reject) => {
         try {
-          // const response = await UserServices.loginUser(data);
-          console.log(data);
-          // resolve(response);
+          const response = await AuthServices.loginUser(data);
+          resolve(response);
         } catch (error) {
+          console.log(error);
           if (error instanceof AxiosError && error.response?.data?.detail) {
             const errMsg = error?.response?.data?.detail;
             setError("email", {});
