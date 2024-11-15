@@ -1,5 +1,6 @@
 import { LoginSchemaType } from "@/Auth/Schema/LoginSchema";
 import configureAxios from "./axiosConfig";
+import { getCookies } from "./getCookies";
 
 const requests = configureAxios();
 
@@ -39,13 +40,13 @@ const AuthServices = {
   //     return requests.post("/auth/forgot-password/change-password/", data);
   //   },
 
-  //   // get user data
-  //   fetchUserData: async (userId: string) => {
-  //     return requests.get(`/auth/user/retrieve/${userId}/`, {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${await getCookies()}`,
-  //     });
-  //   },
+  // get user data
+  fetchUserData: async (userId: string) => {
+    return requests.get(`/auth/user/retrieve/${userId}/`, {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
 
   //   // update user data
   //   updateUserData: async (data: UserProfile) => {

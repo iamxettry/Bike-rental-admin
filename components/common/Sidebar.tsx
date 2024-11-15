@@ -15,7 +15,7 @@ const Sidebar = () => {
           className="w-full object-cover"
         />
       </div>
-      <div className="p-6  overflow-y-scroll">
+      <div className="p-6 ">
         <SidebarList />
       </div>
     </div>
