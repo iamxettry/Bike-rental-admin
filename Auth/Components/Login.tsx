@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Loading from "@/components/utils/Loading";
-import RHFTextField from "./RHFComponents/RHFTextField";
+import RHFTextField from "../../components/RHFComponents/RHFTextField";
 import { LoginSchemaType } from "../Schema/LoginSchema";
 import useLoginSubmit from "@/hooks/useLoginSubmit";
 const Login: React.FC = () => {
