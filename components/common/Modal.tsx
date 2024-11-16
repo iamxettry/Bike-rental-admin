@@ -4,9 +4,8 @@ import {
   DialogTitle,
   Description,
 } from "@headlessui/react";
-import { Fragment } from "react";
 import { LuXCircle } from "react-icons/lu";
-import { AnimatePresence, delay, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 type ModalProps = {
   isOpen: boolean;
@@ -45,7 +44,7 @@ const Modal = ({
                 initial={{ x: "100%" }}
                 animate={{ x: "5%" }}
                 exit={{ opacity: 0, x: "100%" }}
-                className={`w-full max-w-lg p-4 pr-10 space-y-4 bg-white rounded-lg shadow-lg h-screen   overflow-y-auto  transition duration-400 ease-out data-[closed]:opacity-0  `}
+                className={`w-full max-w-lg p-4 pr-10 space-y-4 bg-white rounded-lg shadow-lg    transition duration-400 ease-out data-[closed]:opacity-0  h-full`}
               >
                 <div className="shadow-[0px_4px_2px_-2px_rgba(0,0,0,0.1)] p-2">
                   <button onClick={onClose}>
@@ -55,14 +54,16 @@ const Modal = ({
                     />
                   </button>
                 </div>
-                <div className="p-2">
+                <div className="flex flex-col h-full">
                   <DialogTitle className="text-lg font-bold">
                     {title}
                   </DialogTitle>
                   <Description className="text-sm text-gray-500">
                     {description}
                   </Description>
-                  <div>{children}</div>
+                  <div className="flex-1 p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 h-screen mb-32">
+                    {children}
+                  </div>
                 </div>
               </DialogPanel>
             </div>
