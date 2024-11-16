@@ -34,6 +34,11 @@ export async function middleware(request: NextRequest) {
     if (userData && userData?.user_id) {
       userLoggedIn = true;
       isSuperuser = userData.is_superuser;
+      if (!isSuperuser) {
+        response.cookies.delete(access_token);
+        response.cookies.delete(refresh_token);
+        userLoggedIn = false;
+      }
     } else {
       userLoggedIn = false;
     }
