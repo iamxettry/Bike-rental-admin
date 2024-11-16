@@ -34,9 +34,9 @@ const Navbar = () => {
   console.log("data", data);
   return (
     <motion.nav
-      variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
-      animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.35, ease: "easeInOut" }}
+      // variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
+      // animate={hidden ? "hidden" : "visible"}
+      // transition={{ duration: 0.35, ease: "easeInOut" }}
       className=" sticky top-0 left-0  z-50  bg-gradient-to-r from-blue-200 to-pink-100 p-0.5   drop-shadow-xl"
     >
       <div className="flex justify-end items-center  p-7">

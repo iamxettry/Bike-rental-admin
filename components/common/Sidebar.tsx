@@ -6,7 +6,7 @@ import LogOut from "./LogOut";
 
 const Sidebar = () => {
   return (
-    <div className="col-span-10 sm:col-span-4 md:col-span-3 lg:col-span-2  space-y-2 ">
+    <div className="col-span-10 sm:col-span-4 md:col-span-3 lg:col-span-2  ">
       <div className="bg-blue-200">
         <Image
           src={WithMyBike}
@@ -16,7 +16,7 @@ const Sidebar = () => {
           className="w-full object-cover"
         />
       </div>
-      <div className="p-4 ">
+      <div className="p-4  bg-blue-200">
         <SidebarList />
         <LogOut />
       </div>

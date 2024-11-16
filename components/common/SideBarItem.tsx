@@ -28,7 +28,7 @@ const SideBarItem = ({ item }: { item: SidebarType }) => {
     <>
       <div
         className={`py-2  px-4 rounded-md hover:bg-blue-100  ${
-          pathname === item?.path && "bg-blue-200"
+          pathname === item?.path && "bg-white"
         } `}
       >
         {item?.path ? (
@@ -61,8 +61,8 @@ const SideBarItem = ({ item }: { item: SidebarType }) => {
             <Link
               href={subItem.path}
               key={subItem._id}
-              className={`text-sm p-2 rounded-md font-medium pl-6 block hover:bg-blue-100 ${
-                pathname === subItem?.path && "bg-blue-200"
+              className={`text-sm p-2 my-1 rounded-md font-medium pl-6 block hover:bg-blue-100 ${
+                pathname === subItem?.path && "bg-white"
               }`}
             >
               {subItem.title}
