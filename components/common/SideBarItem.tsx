@@ -18,7 +18,7 @@ const SideBarItem = ({ item }: { item: SidebarType }) => {
       const isInclude = item?.subList.some((item) =>
         item?.path?.includes(pathname)
       );
-      if (isInclude) {
+      if (isInclude && pathname !== "/") {
         setShowSubMenu(true);
       }
     }
