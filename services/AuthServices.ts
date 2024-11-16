@@ -24,13 +24,13 @@ const AuthServices = {
   //     return requests.post(`/auth/resend-otp/`, data);
   //   },
 
-  //   // logout user
-  //   logoutUser: async () => {
-  //     return requests.post("/auth/logout/user/", {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${await getCookies()}`,
-  //     });
-  //   },
+  // logout user
+  logoutUser: async () => {
+    return requests.post("/auth/logout/user/", {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
   //   // Forgot password verify
   //   FPVerify: (data: FPVerifySchemaType) => {
   //     return requests.post("/auth/forgot-password/", data);
