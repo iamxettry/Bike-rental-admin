@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuChevronDown, LuChevronUp } from "react-icons/lu";
 import { usePathname } from "next/navigation";
 import { SidebarType } from "@/types/SidebarType";
@@ -12,6 +12,18 @@ const SideBarItem = ({ item }: { item: SidebarType }) => {
   const handleClick = () => {
     setShowSubMenu(!showSubMenu);
   };
+
+  useEffect(() => {
+    if (item?.subList) {
+      const isInclude = item?.subList.some((item) =>
+        item?.path?.includes(pathname)
+      );
+      if (isInclude) {
+        setShowSubMenu(true);
+      }
+    }
+  }, [item]);
+
   return (
     <>
       <div
@@ -50,7 +62,7 @@ const SideBarItem = ({ item }: { item: SidebarType }) => {
               href={subItem.path}
               key={subItem._id}
               className={`text-sm p-2 rounded-md font-medium pl-6 block hover:bg-blue-100 ${
-                pathname === item?.path && "bg-blue-200"
+                pathname === subItem?.path && "bg-blue-200"
               }`}
             >
               {subItem.title}
