@@ -38,6 +38,7 @@ const RHFTextField = <T extends FieldValues>({
           error={!!error}
           helperText={error?.message}
           size="small"
+          autoComplete="off"
           slotProps={{
             input: {
               endAdornment:
