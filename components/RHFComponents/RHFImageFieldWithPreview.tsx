@@ -9,7 +9,10 @@ type Props<T extends FieldValues> = {
   label: string;
 };
 
-const RHFImageField = <T extends FieldValues>({ name, label }: Props<T>) => {
+const RHFImageFieldWithPreview = <T extends FieldValues>({
+  name,
+  label,
+}: Props<T>) => {
   const { control } = useFormContext<T>();
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -22,7 +25,6 @@ const RHFImageField = <T extends FieldValues>({ name, label }: Props<T>) => {
       setPreview(null);
     }
   };
-
   return (
     <Controller
       name={name}
@@ -34,10 +36,10 @@ const RHFImageField = <T extends FieldValues>({ name, label }: Props<T>) => {
               <LuX
                 size={24}
                 onClick={() => {
-                  handlePreview(null);
-                  onChange(new File([], ""));
+                  setPreview(null);
+                  onChange(null);
                 }}
-                className="cursor-pointer  text-red-500 "
+                className="cursor-pointer  text-red-500"
               />
             </div>
           )}
@@ -89,4 +91,4 @@ const RHFImageField = <T extends FieldValues>({ name, label }: Props<T>) => {
   );
 };
 
-export default RHFImageField;
+export default RHFImageFieldWithPreview;

@@ -31,7 +31,6 @@ const Navbar = () => {
     enabled: !!userId,
     select: (data) => data,
   });
-  console.log("data", data);
   return (
     <motion.nav
       // variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}

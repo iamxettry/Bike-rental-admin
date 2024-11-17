@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { bikeType } from "../types/bikeSchema";
 import useBikeSubmit from "@/hooks/useBikeSubmit";
 import RHFTextField from "@/components/RHFComponents/RHFTextField";
-import RHFImageFieldWithPreview from "@/components/RHFComponents/RHFImageFieldWithPreview";
 import RHFSelectField from "@/components/RHFComponents/RHFSelectField";
+import RHFNumberField from "@/components/RHFComponents/RHFNumberField1";
+import { Button } from "@mui/material";
+import RHFImageFieldWithPreview from "@/components/RHFComponents/RHFImageFieldWithPreview";
 
 const BikeForm = () => {
   const {
     handleSubmit,
     formState: { isSubmitting },
+    watch,
   } = useBikeSubmit();
+  useEffect(() => {
+    const sub = watch((value) => console.log(value));
+    return () => sub.unsubscribe();
+  }, [watch]);
+
   return (
     <form onSubmit={handleSubmit} className="  grid space-y-4 overflow-y-auto">
       <span></span>
@@ -18,26 +26,30 @@ const BikeForm = () => {
       <RHFTextField<bikeType> name="model" label="Model" />
       <RHFTextField<bikeType> name="year" label="Year" type="number" />
       <RHFTextField<bikeType> name="color" label="Color" />
-      <RHFTextField<bikeType> name="price" label="Price" type="number" />
+      <RHFNumberField<bikeType> name="price" label="Price" />
       <h1 className="font-semibold text-gray-700">Features</h1>
       <div className=" gap-4 flex -mt-2 ">
         <RHFSelectField<bikeType>
-          name="features.start"
+          name="start"
           options={[
-            { label: "Kick Start", value: "kick" },
-            { label: "Self Start", value: "self" },
+            { label: "Self Start Only", value: "SELF_START_ONLY" },
+            { label: "Kick & Self Start", value: "KICK_AND_SELF_START" },
+            { label: "Kick Start Only", value: "KICK_START_ONLY" },
           ]}
           label="Start"
         />
-        <RHFTextField<bikeType> name="features.engine" label="Engine" />
-        <RHFTextField<bikeType> name="features.distance" label="Distance" />
+        <RHFTextField<bikeType> name="engine" label="Engine" />
+        <RHFTextField<bikeType> name="distance" label="Distance" />
       </div>
 
       <RHFTextField<bikeType> name="description" label="Description" />
+
       <RHFImageFieldWithPreview<bikeType> name="image" label="Select Image" />
-      <button type="submit" className="">
-        Submit
-      </button>
+
+      <Button variant="contained" type="submit" className="!bg-primary">
+        {isSubmitting ? "Submitting..." : "Submit"}
+      </Button>
+      <span></span>
     </form>
   );
 };
