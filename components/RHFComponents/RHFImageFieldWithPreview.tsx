@@ -29,32 +29,17 @@ const RHFImageField = <T extends FieldValues>({ name, label }: Props<T>) => {
       control={control}
       render={({ field: { onChange }, fieldState: { error } }) => (
         <Box display="flex" flexDirection="column" gap={2}>
-          <Button
-            variant="outlined"
-            component="label"
-            className=" !text-white !border-primary  !bg-primary   hover:bg-orange-500 !capitalize"
-            sx={{ alignSelf: "start" }}
-          >
-            {label}
-            <input
-              type="file"
-              accept="image/*"
-              hidden
-              onChange={(event) => {
-                const file = event.target.files?.[0] || null;
-                onChange(file);
-                handlePreview(file);
-              }}
-            />
-          </Button>
           {preview && (
-            <LuX
-              size={24}
-              onClick={() => {
-                handlePreview(null);
-                onChange(new File([], ""));
-              }}
-            />
+            <div className="flex justify-end items-center mr-10">
+              <LuX
+                size={24}
+                onClick={() => {
+                  handlePreview(null);
+                  onChange(new File([], ""));
+                }}
+                className="cursor-pointer  text-red-500 "
+              />
+            </div>
           )}
           {preview && (
             <Box
@@ -74,6 +59,25 @@ const RHFImageField = <T extends FieldValues>({ name, label }: Props<T>) => {
               />
             </Box>
           )}
+          <Button
+            variant="outlined"
+            component="label"
+            className=" !text-white !border-primary  !bg-primary   hover:bg-orange-500 !capitalize"
+            sx={{ alignSelf: "start" }}
+          >
+            {label}
+            <input
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={(event) => {
+                const file = event.target.files?.[0] || null;
+                onChange(file);
+                handlePreview(file);
+              }}
+            />
+          </Button>
+
           {error && (
             <Typography color="error" variant="caption">
               {error.message}
