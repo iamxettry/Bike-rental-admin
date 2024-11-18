@@ -6,6 +6,7 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./Auth/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./Bikes/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
