@@ -11,10 +11,10 @@ const AddBikeNav = () => {
       <PageTitle title="Add Bike" />
       <Button
         variant="outlined"
-        className="!text-black  !text-sm md:!text-base  !capitalize !font-semibold "
+        className="  !text-sm md:!text-base  !capitalize   hover:!text-primary !text-black   !border-primary  "
         onClick={openModal}
       >
-        Add New Bike
+        <span>Add New Bike</span>
       </Button>
     </div>
   );
