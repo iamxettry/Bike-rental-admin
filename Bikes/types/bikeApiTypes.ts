@@ -18,7 +18,9 @@ export type Bike = {
   isFeatured: boolean;
   description: string;
   image: string | null;
-  features: BikeFeatures;
+  start: string;
+  engine: string;
+  distance: string;
   date: string;
 };
 
