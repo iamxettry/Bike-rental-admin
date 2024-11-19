@@ -27,6 +27,18 @@ const BikeServices = {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
+
+  // Update Bike
+  updateBikeFeaturedStatus: async (
+    id: string,
+    data: {
+      isFeatured: boolean;
+    }
+  ): Promise<successResponse> => {
+    return requests.patch(`/bike/update/${id}/`, data, {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
 };
 
 export default BikeServices;

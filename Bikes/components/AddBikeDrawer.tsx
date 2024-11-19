@@ -2,7 +2,7 @@
 
 import Modal from "@/components/common/Modal";
 import { useModal } from "@/hooks/useModalStore";
-import BikeFormProvider from "./BikeFormProvider";
+import BikeForm from "./BikeForm";
 
 const AddBikeDrawer = () => {
   const { isOpen, closeModal } = useModal();
@@ -15,7 +15,7 @@ const AddBikeDrawer = () => {
           title="Add New Bike "
           description="Add new  Bike to the system."
         >
-          <BikeFormProvider />
+          <BikeForm />
         </Modal>
       )}
     </div>
