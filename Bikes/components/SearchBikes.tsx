@@ -1,19 +1,19 @@
 "use client";
 
-import { useBikeStore } from "@/store/bikeStore";
+// import { useBikeStore } from "@/store/bikeStore";
 import { LuSearch } from "react-icons/lu";
 
 const SearchBikes = () => {
-  const { searchQuery, setSearchQuery } = useBikeStore((state) => ({
-    searchQuery: state.searchQuery,
-    setSearchQuery: state.setSearchQuery,
-  }));
+  // const { searchQuery, setSearchQuery } = useBikeStore((state) => ({
+  //   searchQuery: state.searchQuery,
+  //   setSearchQuery: state.setSearchQuery,
+  // }));
   return (
     <div className=" mt-12 relative">
       <input
         type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        // value={searchQuery}
+        // onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Search Yout Favourite Bikes"
         className="w-full py-2 px-6 border bg-white/50 border-gray-400 rounded-md outline-none focus-within:border-primary/75"
       />

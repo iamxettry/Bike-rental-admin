@@ -1,12 +1,6 @@
 "use client";
-import React, { useState } from "react";
 
-import {
-  motion,
-  useScroll,
-  useMotionValueEvent,
-  MotionValue,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 
 import AuthServices from "@/services/AuthServices";
