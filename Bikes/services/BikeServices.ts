@@ -1,5 +1,5 @@
 import configureAxios from "@/services/axiosConfig";
-import { BikeListResponse } from "../types/bikeApiTypes";
+import { Bike, BikeListResponse } from "../types/bikeApiTypes";
 import { bikeType } from "../types/bikeSchema";
 import { successResponse } from "@/Auth/types/common";
 import { getCookies } from "@/services/getCookies";
@@ -38,6 +38,11 @@ const BikeServices = {
     return requests.patch(`/bike/update/${id}/`, data, {
       Authorization: `Bearer ${await getCookies()}`,
     });
+  },
+
+  // get one Bike
+  getBikeById: async (id: string): Promise<Bike> => {
+    return requests.get(`/bike/retrieve/${id}/`);
   },
 };
 
