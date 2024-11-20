@@ -5,15 +5,17 @@ import { useModal } from "@/hooks/useModalStore";
 import BikeForm from "./BikeForm";
 
 const AddBikeDrawer = () => {
-  const { isOpen, closeModal } = useModal();
+  const { isOpen, closeModal, editId } = useModal();
   return (
     <div>
       {isOpen && (
         <Modal
           isOpen={isOpen}
           onClose={closeModal}
-          title="Add New Bike "
-          description="Add new  Bike to the system."
+          title={editId ? "Edit Bike" : "Add New Bike "}
+          description={
+            editId ? "Edit selected Bike" : "Add new  Bike to the system."
+          }
         >
           <BikeForm />
         </Modal>
