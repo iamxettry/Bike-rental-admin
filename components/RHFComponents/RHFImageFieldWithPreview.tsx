@@ -3,6 +3,7 @@ import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
 import { Button, Box, Typography } from "@mui/material";
 import { useState } from "react";
 import { LuX } from "react-icons/lu";
+import Image from "next/image";
 
 type Props<T extends FieldValues> = {
   name: Path<T>;
@@ -54,9 +55,10 @@ const RHFImageFieldWithPreview = <T extends FieldValues>({
                 objectFit: "contain",
               }}
             >
-              <img
+              <Image
                 src={preview}
                 alt="Preview"
+                priority
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </Box>

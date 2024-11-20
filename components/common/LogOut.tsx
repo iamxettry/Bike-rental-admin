@@ -17,7 +17,7 @@ const LogOut = () => {
         try {
           const response = await AuthServices.logoutUser();
           resolve(response);
-        } catch (err: any) {
+        } catch (err) {
           if (err instanceof AxiosError && err.response?.data) {
             reject(err.response?.data?.detail || err.response?.data?.error);
           } else if (err instanceof Error) {

@@ -12,18 +12,18 @@ import Cookies from "js-cookie";
 import AuthServices from "@/services/AuthServices";
 import { useQuery } from "@tanstack/react-query";
 const Navbar = () => {
-  const [hidden, setHidden] = useState(false);
-  const { scrollY }: { scrollY: MotionValue<number> } = useScroll();
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious();
-    if (typeof latest === "number" && typeof previous === "number") {
-      if (latest > previous && latest > 150) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-    }
-  });
+  // const [hidden, setHidden] = useState(false);
+  // const { scrollY }: { scrollY: MotionValue<number> } = useScroll();
+  // useMotionValueEvent(scrollY, "change", (latest) => {
+  //   const previous = scrollY.getPrevious();
+  //   if (typeof latest === "number" && typeof previous === "number") {
+  //     if (latest > previous && latest > 150) {
+  //       setHidden(true);
+  //     } else {
+  //       setHidden(false);
+  //     }
+  //   }
+  // });
   const userId = Cookies.get("user_id") as string;
   const { data, isFetched } = useQuery({
     queryKey: ["user", userId],

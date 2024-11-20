@@ -1,5 +1,6 @@
 "use client";
 import { Box } from "@mui/material";
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { FieldValues, Path, useFormContext } from "react-hook-form";
 import { LuX } from "react-icons/lu";
@@ -25,7 +26,7 @@ const RHFImageField = <T extends FieldValues>({ name, label }: Props<T>) => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     if (file) {
-      setValue(name, file as any);
+      setValue(name, file);
     }
     handlePreview(file);
   };
@@ -58,7 +59,7 @@ const RHFImageField = <T extends FieldValues>({ name, label }: Props<T>) => {
               objectFit: "contain",
             }}
           >
-            <img
+            <Image
               src={preview}
               alt="Preview"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}

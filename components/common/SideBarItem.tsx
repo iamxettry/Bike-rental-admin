@@ -22,7 +22,7 @@ const SideBarItem = ({ item }: { item: SidebarType }) => {
         setShowSubMenu(true);
       }
     }
-  }, [item]);
+  }, [item, pathname]);
 
   return (
     <>
