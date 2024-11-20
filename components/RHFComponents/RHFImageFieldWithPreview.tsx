@@ -4,6 +4,7 @@ import { Button, Box, Typography } from "@mui/material";
 import { useState } from "react";
 import { LuX } from "react-icons/lu";
 import Image from "next/image";
+import { useModal } from "@/hooks/useModalStore";
 
 type Props<T extends FieldValues> = {
   name: Path<T>;
@@ -15,7 +16,7 @@ const RHFImageFieldWithPreview = <T extends FieldValues>({
   label,
 }: Props<T>) => {
   const { control } = useFormContext<T>();
-  const [preview, setPreview] = useState<string | null>(null);
+  const { preview, setPreview } = useModal();
 
   const handlePreview = (file: File | null) => {
     if (file) {
@@ -59,6 +60,8 @@ const RHFImageFieldWithPreview = <T extends FieldValues>({
                 src={preview}
                 alt="Preview"
                 priority
+                width={500}
+                height={800}
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </Box>
