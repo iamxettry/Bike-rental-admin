@@ -4,21 +4,27 @@ import modalStore from "@/store/modalStore";
 
 export const useModal = () => {
   const {
-    isOpen,
+    isModalOpen,
     openModal,
     closeModal,
-    editId,
-    setEditId,
+    isDrawerOpen,
+    openDrawer,
+    closeDrawer,
+    bikeId,
+    setBikeId,
     preview,
     setPreview,
   } = modalStore();
 
   return {
-    isOpen,
+    isModalOpen,
     openModal,
     closeModal,
-    editId,
-    setEditId,
+    isDrawerOpen,
+    openDrawer,
+    closeDrawer,
+    bikeId,
+    setBikeId,
     preview,
     setPreview,
   };

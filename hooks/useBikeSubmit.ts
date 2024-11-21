@@ -13,36 +13,37 @@ import { useModal } from "./useModalStore";
 const useBikeSubmit = () => {
   const { handleSubmit, watch, setValue, reset, formState } =
     useFormContext<bikeType>();
-  const { editId, setPreview, closeModal } = useModal();
+  const { bikeId, setPreview, closeDrawer, isDrawerOpen, closeModal } =
+    useModal();
   const watchImage = watch("image");
   const queryClient = useQueryClient();
 
-  console.log("edit id", editId);
   const { data, isFetched } = useQuery({
-    queryFn: async () => await BikeServices.getBikeById(editId),
+    queryFn: async () => await BikeServices.getBikeById(bikeId),
     queryKey: ["get-one-bike"],
-    enabled: !!editId,
+    enabled: !!bikeId,
   });
 
   useEffect(() => {
-    if (editId && data && isFetched) {
-      setValue("name", data.name);
-      setValue("brand", data.brand);
-      setValue("model", data.model);
-      setValue("year", data.year);
-      setValue("color", data.color);
-      setValue("price", data.price);
+    if (bikeId && data && isFetched) {
+      setValue("name", data.name ?? "");
+      setValue("brand", data.brand ?? "");
+      setValue("model", data.model ?? "");
+      setValue("year", data.year ?? 0);
+      setValue("color", data.color ?? "");
+      setValue("price", data.price ?? 0);
       setValue(
         "start",
         data.start as
           | "SELF_START_ONLY"
           | "KICK_AND_SELF_START"
           | "KICK_START_ONLY"
-      );
-      setValue("engine", data.engine);
-      setValue("distance", data.distance);
-      setValue("description", data.description);
-      setPreview(data.image);
+      ) ?? "SELF_START_ONLY",
+        setValue("engine", data.engine ?? "");
+      setValue("distance", data.distance ?? "");
+      setValue("description", data.description ?? "");
+
+      setPreview(data.image ?? null);
     } else {
       reset({
         name: "",
@@ -59,9 +60,38 @@ const useBikeSubmit = () => {
       });
       setPreview(null);
     }
-  }, [editId, data]);
+  }, [bikeId, data]);
 
-  console.log("data", data);
+  // // Delete Bike
+  const handleDeleteBike = async (id: string) => {
+    const newPromise: Promise<successResponse> = new Promise(
+      async (resolve, reject) => {
+        try {
+          const response = await BikeServices.deleteBike(id);
+          resolve(response);
+          closeModal();
+          queryClient.invalidateQueries({ queryKey: ["BikeList"] });
+        } catch (error) {
+          if (error instanceof AxiosError && error.response?.data) {
+            const errMsg =
+              error?.response?.data?.detail || error?.response?.data?.data;
+            reject(errMsg);
+          } else if (error instanceof Error) {
+            reject(error?.message);
+          } else {
+            reject("Network Error!!");
+          }
+        }
+      }
+    );
+
+    await toast.promise(newPromise, {
+      loading: "Loading",
+      success: (res) => res.success || "Bike deleted successfully",
+      error: (err) => err || "Failed to delete bike",
+    });
+  };
+
   const handleFeaturedStatus = async (id: string, bike: Bike) => {
     const newPromise: Promise<successResponse> = new Promise(
       async (resolve, reject) => {
@@ -97,13 +127,20 @@ const useBikeSubmit = () => {
     if (!watchImage) {
       delete data.image;
     }
-
+    console.log("form data", data);
     const newPromise: Promise<successResponse> = new Promise(
       async (resolve, reject) => {
         try {
-          const response = await BikeServices.postBike(data);
-          resolve(response);
-          closeModal();
+          if (bikeId) {
+            // Call update API for editing
+            const response = await BikeServices.updateBike(bikeId, data);
+            resolve(response);
+          } else {
+            // Call create API for adding new bike
+            const response = await BikeServices.postBike(data);
+            resolve(response);
+          }
+          closeDrawer();
         } catch (error) {
           console.log("error", error);
           if (error instanceof AxiosError && error.response?.data) {
@@ -129,6 +166,8 @@ const useBikeSubmit = () => {
     watch,
     formState,
     handleFeaturedStatus,
+    handleDeleteBike,
+    reset,
   };
 };
 
