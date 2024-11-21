@@ -24,7 +24,7 @@ const BikeForm = () => {
       <RHFTextField<bikeType> name="name" label="Name" />
       <RHFTextField<bikeType> name="brand" label="Brand" />
       <RHFTextField<bikeType> name="model" label="Model" />
-      <RHFTextField<bikeType> name="year" label="Year" type="number" />
+      <RHFNumberField<bikeType> name="year" label="Year" />
       <RHFTextField<bikeType> name="color" label="Color" />
       <RHFNumberField<bikeType> name="price" label="Price" />
       <h1 className="font-semibold text-gray-700">Features</h1>

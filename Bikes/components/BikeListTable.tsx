@@ -1,18 +1,65 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Bike, BikeListResponse } from "../types/bikeApiTypes";
 import { Switch } from "@headlessui/react";
 import { LuDelete, LuEye, LuFileEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 import { useModal } from "@/hooks/useModalStore";
+import useBikeSubmit from "@/hooks/useBikeSubmit";
+import { useQuery } from "@tanstack/react-query";
+import BikeServices from "../services/BikeServices";
 
 type BikeListTableProps = {
   data: BikeListResponse;
-  handleFeaturedStatus: (id: string, status: Bike) => void;
 };
 
-const BikeListTable = ({ data, handleFeaturedStatus }: BikeListTableProps) => {
-  const { openModal, setEditId } = useModal();
+const BikeListTable = ({ data }: BikeListTableProps) => {
+  const { handleFeaturedStatus, reset } = useBikeSubmit();
+  const { openDrawer, bikeId, setBikeId, openModal, setPreview } = useModal();
+
+  const { data: BikeData, isFetched } = useQuery({
+    queryFn: async () => await BikeServices.getBikeById(bikeId),
+    queryKey: ["get-one-bike"],
+    enabled: !!bikeId,
+  });
+
+  // useEffect(() => {
+  //   if (bikeId && BikeData && isFetched) {
+  //     reset({
+  //       name: BikeData.name ?? "",
+  //       brand: BikeData.brand ?? "",
+  //       model: BikeData.model ?? "",
+  //       year: BikeData.year ?? 0,
+  //       color: BikeData.color ?? "",
+  //       price: BikeData.price ?? 0,
+  //       start:
+  //         (BikeData.start as
+  //           | "SELF_START_ONLY"
+  //           | "KICK_AND_SELF_START"
+  //           | "KICK_START_ONLY") ?? "SELF_START_ONLY",
+  //       engine: BikeData.engine ?? "",
+  //       distance: BikeData.distance ?? "",
+  //       description: BikeData.description ?? "",
+  //       image: null,
+  //     });
+  //     setPreview(BikeData.image ?? null);
+  //   } else if (!bikeId) {
+  //     reset({
+  //       name: "",
+  //       brand: "",
+  //       model: "",
+  //       year: 2021,
+  //       color: "",
+  //       price: 0,
+  //       start: "SELF_START_ONLY",
+  //       engine: "",
+  //       distance: "",
+  //       description: "",
+  //       image: null,
+  //     });
+  //     setPreview(null);
+  //   }
+  // }, [bikeId, BikeData, reset]);
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
@@ -50,20 +97,35 @@ const BikeListTable = ({ data, handleFeaturedStatus }: BikeListTableProps) => {
                 <td className="px-6 py-4 flex gap-3 items-center">
                   <LuEye
                     size={20}
+                    onClick={() => {
+                      console.log(row.id);
+                    }}
                     className="cursor-pointer text-primary/80 hover:text-primary"
                   />
-                  <LuFileEdit
-                    size={20}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      openDrawer();
+                      setBikeId(row.id);
+                    }}
+                  >
+                    <LuFileEdit
+                      size={20}
+                      className="cursor-pointer text-green-600 hover:text-green-700"
+                    />
+                  </button>
+
+                  <button
                     onClick={() => {
                       openModal();
-                      setEditId(row.id);
+                      setBikeId(row.id);
                     }}
-                    className="cursor-pointer text-green-600 hover:text-green-700"
-                  />
-                  <MdDelete
-                    size={20}
-                    className="cursor-pointer text-red-500 hover:text-red-600"
-                  />
+                  >
+                    <MdDelete
+                      size={20}
+                      className="cursor-pointer text-red-500 hover:text-red-600"
+                    />
+                  </button>
                 </td>
               </tr>
             ))}

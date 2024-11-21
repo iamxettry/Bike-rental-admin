@@ -1,7 +1,6 @@
 "use client";
 
 import { FormProvider, useForm } from "react-hook-form";
-import BikeForm from "./BikeForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bikeSchema, defaultBikeValues } from "../types/bikeSchema";
 

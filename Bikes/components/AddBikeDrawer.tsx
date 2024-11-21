@@ -1,26 +1,26 @@
 "use client";
 
-import Modal from "@/components/common/Modal";
 import { useModal } from "@/hooks/useModalStore";
 import BikeForm from "./BikeForm";
+import Drawer from "@/components/common/Drawer";
 
 const AddBikeDrawer = () => {
-  const { isOpen, closeModal, editId } = useModal();
+  const { isDrawerOpen, closeDrawer, bikeId } = useModal();
   return (
-    <div>
-      {isOpen && (
-        <Modal
-          isOpen={isOpen}
-          onClose={closeModal}
-          title={editId ? "Edit Bike" : "Add New Bike "}
+    <>
+      {isDrawerOpen && (
+        <Drawer
+          isOpen={isDrawerOpen}
+          onClose={closeDrawer}
+          title={bikeId ? "Edit Bike" : "Add New Bike "}
           description={
-            editId ? "Edit selected Bike" : "Add new  Bike to the system."
+            bikeId ? "Edit selected Bike" : "Add new  Bike to the system."
           }
         >
           <BikeForm />
-        </Modal>
+        </Drawer>
       )}
-    </div>
+    </>
   );
 };
 

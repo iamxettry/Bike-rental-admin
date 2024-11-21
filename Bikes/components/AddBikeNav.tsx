@@ -5,14 +5,14 @@ import { Button } from "@mui/material";
 import React from "react";
 
 const AddBikeNav = () => {
-  const { openModal } = useModal();
+  const { openDrawer } = useModal();
   return (
     <div className=" flex justify-between items-center">
       <PageTitle title="Add Bike" />
       <Button
         variant="outlined"
         className="  !text-sm md:!text-base  !capitalize   hover:!text-primary !text-black   !border-primary  "
-        onClick={openModal}
+        onClick={openDrawer}
       >
         <span>Add New Bike</span>
       </Button>

@@ -5,10 +5,12 @@ import BikeListTable from "./BikeListTable";
 import Loading from "@/components/utils/Loading";
 import Notfound from "@/components/common/Notfound";
 import useBikeSubmit from "@/hooks/useBikeSubmit";
+import { useModal } from "@/hooks/useModalStore";
+import Modal from "@/components/common/Modal";
 
 const BikeList = () => {
-  const { handleFeaturedStatus } = useBikeSubmit();
-
+  const { isModalOpen, bikeId, closeModal } = useModal();
+  const { handleDeleteBike } = useBikeSubmit();
   const {
     data: BikeList,
     isFetching,
@@ -25,16 +27,28 @@ const BikeList = () => {
           <Loading />
         </div>
       ) : BikeList && BikeList?.length > 0 ? (
-        <BikeListTable
-          data={BikeList}
-          handleFeaturedStatus={(id, bike) => {
-            handleFeaturedStatus(id, bike);
-            // Optionally manually refetch the bike list here
-            // refetch();
-          }}
-        />
+        <BikeListTable data={BikeList} />
       ) : (
         <Notfound msg="No Data" />
+      )}
+      {isModalOpen && (
+        <Modal
+          title="Delete Bike "
+          description="Are you sure? You want to delete bike ."
+        >
+          <div className="flex justify-end ">
+            <button
+              onClick={() => {
+                handleDeleteBike(bikeId);
+                closeModal();
+                refetch();
+              }}
+              className="px-4 py-2 text-sm font-semibold text-white bg-red-500 rounded-md"
+            >
+              Confirm
+            </button>
+          </div>
+        </Modal>
       )}
     </div>
   );
