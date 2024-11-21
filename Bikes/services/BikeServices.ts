@@ -29,6 +29,20 @@ const BikeServices = {
   },
 
   // Update Bike
+  updateBike: async (id: string, data: bikeType): Promise<successResponse> => {
+    return requests.patch(`/bike/update/${id}/`, data, {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+
+  // delete Bike
+  deleteBike: async (id: string): Promise<successResponse> => {
+    return requests.delete(`/bike/delete/${id}/`, {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+  // Update Bike status
   updateBikeFeaturedStatus: async (
     id: string,
     data: {
