@@ -1,27 +1,35 @@
 import { create } from "zustand";
 type State = {
-  isOpen: boolean;
-  editId: string;
+  isDrawerOpen: boolean;
+  isModalOpen: boolean;
+  bikeId: string;
   preview: string | null;
 };
 
 type Action = {
   openModal: () => void;
   closeModal: () => void;
-  setEditId: (value: string) => void;
+  openDrawer: () => void;
+  closeDrawer: () => void;
+  setBikeId: (value: string) => void;
   setPreview: (value: string | null) => void;
 };
 
 const modalStore = create<State & Action>((set) => ({
-  isOpen: false,
-  openModal: () => set({ isOpen: true }),
-  closeModal: () => set({ isOpen: false, editId: "", preview: null }),
+  isDrawerOpen: false,
+  isModalOpen: false,
+  openDrawer: () => set({ isDrawerOpen: true }),
+  closeDrawer: () => set({ isDrawerOpen: false, bikeId: "", preview: null }),
 
-  editId: "",
-  setEditId: (value) => set({ editId: value }),
+  bikeId: "",
+  setBikeId: (value) => set({ bikeId: value }),
 
   preview: null,
   setPreview: (value) => set({ preview: value }),
+
+  // modal
+  openModal: () => set({ isModalOpen: true }),
+  closeModal: () => set({ isModalOpen: false }),
 }));
 
 export default modalStore;
