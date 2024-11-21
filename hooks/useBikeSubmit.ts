@@ -13,7 +13,7 @@ import { useModal } from "./useModalStore";
 const useBikeSubmit = () => {
   const { handleSubmit, watch, setValue, reset, formState } =
     useFormContext<bikeType>();
-  const { editId, setPreview } = useModal();
+  const { editId, setPreview, closeModal } = useModal();
   const watchImage = watch("image");
   const queryClient = useQueryClient();
 
@@ -25,18 +25,39 @@ const useBikeSubmit = () => {
   });
 
   useEffect(() => {
-    if (data && isFetched) {
+    if (editId && data && isFetched) {
       setValue("name", data.name);
       setValue("brand", data.brand);
       setValue("model", data.model);
       setValue("year", data.year);
       setValue("color", data.color);
       setValue("price", data.price);
-      setValue("start", data.start);
+      setValue(
+        "start",
+        data.start as
+          | "SELF_START_ONLY"
+          | "KICK_AND_SELF_START"
+          | "KICK_START_ONLY"
+      );
       setValue("engine", data.engine);
       setValue("distance", data.distance);
       setValue("description", data.description);
       setPreview(data.image);
+    } else {
+      reset({
+        name: "",
+        brand: "",
+        model: "",
+        year: 2021,
+        color: "",
+        price: 0,
+        start: "SELF_START_ONLY",
+        engine: "",
+        distance: "",
+        description: "",
+        image: null,
+      });
+      setPreview(null);
     }
   }, [editId, data]);
 
@@ -82,6 +103,7 @@ const useBikeSubmit = () => {
         try {
           const response = await BikeServices.postBike(data);
           resolve(response);
+          closeModal();
         } catch (error) {
           console.log("error", error);
           if (error instanceof AxiosError && error.response?.data) {
