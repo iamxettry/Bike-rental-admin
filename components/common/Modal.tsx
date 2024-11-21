@@ -1,76 +1,57 @@
+import { useModal } from "@/hooks/useModalStore";
 import {
+  Description,
   Dialog,
   DialogPanel,
   DialogTitle,
-  Description,
 } from "@headlessui/react";
+import React from "react";
 import { LuXCircle } from "react-icons/lu";
-import { AnimatePresence, motion } from "framer-motion";
 
-type ModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
+type PropsType = {
   title: string;
-  description?: string;
+  description: string;
   children: React.ReactNode;
 };
-
-const Modal = ({
-  isOpen,
-  onClose,
-  title,
-  description,
-  children,
-}: ModalProps) => {
+const Modal = ({ title, description, children }: PropsType) => {
+  const { isModalOpen, closeModal } = useModal();
   return (
-    <>
-      <AnimatePresence>
-        {isOpen && (
-          <Dialog
-            open={isOpen}
-            onClose={onClose}
-            transition
-            className="relative z-50"
-          >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/30"
-            />
-            <div className="fixed inset-0 flex items-center justify-end  bg-blue-600/40">
-              <DialogPanel
-                as={motion.div}
-                initial={{ x: "100%" }}
-                animate={{ x: "5%" }}
-                exit={{ opacity: 0, x: "100%" }}
-                className={`w-full max-w-lg p-4 pr-10 space-y-4 bg-white rounded-lg shadow-lg    transition duration-400 ease-out data-[closed]:opacity-0  h-full`}
-              >
-                <div className="shadow-[0px_4px_2px_-2px_rgba(0,0,0,0.1)] p-2">
-                  <button onClick={onClose}>
-                    <LuXCircle
-                      size={24}
-                      className=" text-gray-600 hover:text-red-500"
-                    />
-                  </button>
-                </div>
-                <div className="flex flex-col h-full">
-                  <DialogTitle className="text-lg font-bold">
-                    {title}
-                  </DialogTitle>
-                  <Description className="text-sm text-gray-500">
-                    {description}
-                  </Description>
-                  <div className="flex-1 p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 h-screen mb-32">
-                    {children}
-                  </div>
-                </div>
-              </DialogPanel>
-            </div>
-          </Dialog>
-        )}
-      </AnimatePresence>
-    </>
+    <Dialog open={isModalOpen} onClose={closeModal} className="relative z-50">
+      <div
+        className="fixed inset-0 bg-black bg-opacity-25"
+        aria-hidden="true"
+      />
+
+      <div className="fixed inset-0 flex items-center justify-center p-4">
+        <DialogPanel className="w-full max-w-lg p-6 space-y-4 bg-white rounded-lg shadow-lg">
+          <div className="flex justify-between items-center">
+            {" "}
+            <DialogTitle className="text-lg font-bold">{title}</DialogTitle>
+            <button onClick={closeModal} className="">
+              <LuXCircle size={24} className="hover:text-red-500" />
+            </button>
+          </div>
+          <Description className="text-sm text-gray-500">
+            {description}
+          </Description>
+          <div>{children}</div>
+          {/* <div className="flex gap-4">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 text-sm font-semibold text-gray-600 bg-gray-200 rounded-md"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={onClose}
+              className="px-4 py-2 text-sm font-semibold text-white bg-red-500 rounded-md"
+            >
+              Confirm
+            </button>
+          </div> */}
+        </DialogPanel>
+      </div>
+    </Dialog>
   );
 };
 
