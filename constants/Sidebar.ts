@@ -4,8 +4,36 @@ export const adminSidebarList = [
     title: "Dashboard",
     path: "/",
   },
+
   {
     _id: 2,
+    title: "Bike Management",
+    path: "/admin/bike-management/all-bikes",
+    // subList: [
+    //   {
+    //     _id: 1,
+    //     title: "Manage Bike",
+    //     path: "/admin/bike-management/all-bikes",
+    //   },
+    //   // {
+    //   //   _id: 2,
+    //   //   title: "Add New Bike",
+    //   //   path: "/admin/bike-management/add-bike",
+    //   // },
+    //   // {
+    //   //   _id: 3,
+    //   //   title: "Bike Categories",
+    //   //   path: "/admin/bike-management/categories",
+    //   // },
+    //   // {
+    //   //   _id: 4,
+    //   //   title: "Bike Availability",
+    //   //   path: "/admin/bike-management/availability",
+    //   // },
+    // ],
+  },
+  {
+    _id: 3,
     title: "User Management",
     subList: [
       {
@@ -22,32 +50,6 @@ export const adminSidebarList = [
         _id: 3,
         title: "User Roles & Permissions",
         path: "/admin/user-management/roles-permissions",
-      },
-    ],
-  },
-  {
-    _id: 3,
-    title: "Bike Management",
-    subList: [
-      {
-        _id: 1,
-        title: "All Bikes",
-        path: "/admin/bike-management/all-bikes",
-      },
-      {
-        _id: 2,
-        title: "Add New Bike",
-        path: "/admin/bike-management/add-bike",
-      },
-      {
-        _id: 3,
-        title: "Bike Categories",
-        path: "/admin/bike-management/categories",
-      },
-      {
-        _id: 4,
-        title: "Bike Availability",
-        path: "/admin/bike-management/availability",
       },
     ],
   },
