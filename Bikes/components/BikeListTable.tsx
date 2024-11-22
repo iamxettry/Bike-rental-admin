@@ -1,20 +1,18 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { Bike, BikeListResponse } from "../types/bikeApiTypes";
 import { Switch } from "@headlessui/react";
-import { LuDelete, LuEye, LuFileEdit } from "react-icons/lu";
+import { LuEye, LuFileEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 import { useModal } from "@/hooks/useModalStore";
 import useBikeSubmit from "@/hooks/useBikeSubmit";
-import { useQuery } from "@tanstack/react-query";
-import BikeServices from "../services/BikeServices";
 
 type BikeListTableProps = {
   data: BikeListResponse;
 };
 
 const BikeListTable = ({ data }: BikeListTableProps) => {
-  const { handleFeaturedStatus, fetchAndSetBikeData } = useBikeSubmit();
+  const { handleFeaturedStatus, fetchAndSetBikeData, handleAvailableStatus } =
+    useBikeSubmit();
   const { openDrawer, setBikeId, openModal } = useModal();
 
   return (
@@ -27,6 +25,7 @@ const BikeListTable = ({ data }: BikeListTableProps) => {
               <th className="px-6 py-4">Model</th>
               <th className="px-6 py-4">Year</th>
               <th className="px-6 py-4">Is Featured</th>
+              <th className="px-6 py-4">Is Available</th>
               <th className="px-6 py-4">Actions</th>
             </tr>
           </thead>
@@ -46,6 +45,16 @@ const BikeListTable = ({ data }: BikeListTableProps) => {
                   <Switch
                     checked={row.isFeatured}
                     onChange={() => handleFeaturedStatus(row.id, row)}
+                    className="group inline-flex h-5 w-9 items-center rounded-full bg-gray-400 transition data-[checked]:bg-primary"
+                  >
+                    <span className="size-3 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-5" />
+                  </Switch>
+                </td>
+                <td className="px-6 py-4">
+                  {row.isAvailable}
+                  <Switch
+                    checked={row.isAvailable}
+                    onChange={() => handleAvailableStatus(row.id, row)}
                     className="group inline-flex h-5 w-9 items-center rounded-full bg-gray-400 transition data-[checked]:bg-primary"
                   >
                     <span className="size-3 translate-x-1 rounded-full bg-white transition group-data-[checked]:translate-x-5" />
