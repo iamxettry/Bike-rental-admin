@@ -53,6 +53,17 @@ const BikeServices = {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
+  // Update Bike Available status
+  updateBikeAvailableStaus: async (
+    id: string,
+    data: {
+      isAvailable: boolean;
+    }
+  ): Promise<successResponse> => {
+    return requests.patch(`/bike/update/${id}/`, data, {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
 
   // get one Bike
   getBikeById: async (id: string): Promise<Bike> => {
