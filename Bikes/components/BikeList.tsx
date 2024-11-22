@@ -44,7 +44,7 @@ const BikeList = () => {
   }, [searchQuery, BikeList, isFetching]);
 
   return (
-    <div className="">
+    <div className="mt-5">
       {isLoading ? (
         <div className="h-96 flex justify-center items-center">
           <Loading />
