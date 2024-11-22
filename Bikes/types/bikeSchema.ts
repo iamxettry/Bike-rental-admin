@@ -5,7 +5,7 @@ export const bikeSchema = z.object({
   rating: z.number().optional(),
   brand: z.string(),
   model: z.string(),
-  year: z.number(),
+  year: z.number().optional(),
   color: z.string(),
   start: z.enum(["SELF_START_ONLY", "KICK_AND_SELF_START", "KICK_START_ONLY"]), // enum
   engine: z.string(),
@@ -24,7 +24,7 @@ export const defaultBikeValues: bikeType = {
   name: "",
   brand: "",
   model: "",
-  year: 2021,
+  year: 0,
   color: "",
   start: "SELF_START_ONLY",
   engine: "",
