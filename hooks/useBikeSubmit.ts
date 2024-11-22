@@ -104,6 +104,34 @@ const useBikeSubmit = () => {
       error: (err) => err || "Failed to update bike",
     });
   };
+  const handleAvailableStatus = async (id: string, bike: Bike) => {
+    const newPromise: Promise<successResponse> = new Promise(
+      async (resolve, reject) => {
+        try {
+          const response = await BikeServices.updateBikeAvailableStaus(id, {
+            isAvailable: bike.isAvailable ? false : true,
+          });
+          resolve(response);
+          queryClient.invalidateQueries({ queryKey: ["BikeList"] });
+        } catch (error) {
+          if (error instanceof AxiosError && error.response?.data) {
+            const errMsg =
+              error?.response?.data?.detail || error?.response?.data?.data;
+            reject(errMsg);
+          } else if (error instanceof Error) {
+            reject(error?.message);
+          } else {
+            reject("Network Error!!");
+          }
+        }
+      }
+    );
+    await toast.promise(newPromise, {
+      loading: "Loading",
+      success: (res) => res.success || "Bike updated successfully",
+      error: (err) => err || "Failed to update bike",
+    });
+  };
 
   const onSubmit: SubmitHandler<bikeType> = async (data) => {
     // if not image is selected, set image to null
@@ -141,8 +169,12 @@ const useBikeSubmit = () => {
     );
     await toast.promise(newPromise, {
       loading: "Loading",
-      success: (res) => res.success || "Bike added successfully",
-      error: (err) => err || "Failed to add bike",
+      success: (res) =>
+        res.success
+          ? res.success || "Bike added successfully"
+          : "Bike update successfully",
+      error: (err) =>
+        err || bikeId ? "Failed to update Bike" : "Failed to add bike",
     });
   };
   return {
@@ -150,6 +182,7 @@ const useBikeSubmit = () => {
     watch,
     formState,
     handleFeaturedStatus,
+    handleAvailableStatus,
     handleDeleteBike,
     reset,
     fetchAndSetBikeData,
