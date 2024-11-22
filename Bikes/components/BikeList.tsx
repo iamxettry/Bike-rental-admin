@@ -7,6 +7,8 @@ import Notfound from "@/components/common/Notfound";
 import useBikeSubmit from "@/hooks/useBikeSubmit";
 import { useModal } from "@/hooks/useModalStore";
 import Modal from "@/components/common/Modal";
+import { useBikeStore } from "@/store/store";
+import { useEffect } from "react";
 
 const BikeList = () => {
   const { isModalOpen, bikeId, setBikeId, closeModal } = useModal();
@@ -21,16 +23,36 @@ const BikeList = () => {
     refetchOnWindowFocus: true,
   });
 
+  const { searchQuery, bikes, isLoading, setIsLoading, setBikes } =
+    useBikeStore();
+
+  useEffect(() => {
+    if (searchQuery) {
+      setIsLoading(true);
+      const timer = setTimeout(async () => {
+        const response = await BikeServices.searchBikes(searchQuery);
+        setIsLoading(false);
+        setBikes(response);
+      }, 500);
+      return () => clearTimeout(timer);
+    } else {
+      if (BikeList) {
+        setBikes(BikeList);
+        setIsLoading(isFetching);
+      }
+    }
+  }, [searchQuery, BikeList, isFetching]);
+
   return (
     <div className="">
-      {isFetching ? (
+      {isLoading ? (
         <div className="h-96 flex justify-center items-center">
           <Loading />
         </div>
-      ) : BikeList && BikeList?.length > 0 ? (
-        <BikeListTable data={BikeList} />
+      ) : bikes && bikes?.length > 0 ? (
+        <BikeListTable data={bikes} />
       ) : (
-        <Notfound msg="No Data" />
+        <Notfound msg="Result Not Found" />
       )}
       {isModalOpen && (
         <Modal
