@@ -16,6 +16,7 @@ export type Bike = {
   color: string;
   price: number;
   isFeatured: boolean;
+  isAvailable: boolean;
   description: string;
   image: string | null;
   start: string;
