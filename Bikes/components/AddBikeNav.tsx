@@ -15,7 +15,7 @@ const AddBikeNav = () => {
     reset(defaultBikeValues);
   };
   return (
-    <div className=" flex justify-between items-center">
+    <div className=" flex flex-col md:flex-row gap-4 justify-between items-center">
       <SearchBikes />
       <Button
         variant="outlined"
