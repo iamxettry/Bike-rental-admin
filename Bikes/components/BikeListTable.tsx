@@ -61,13 +61,13 @@ const BikeListTable = ({ data }: BikeListTableProps) => {
                   </Switch>
                 </td>
                 <td className="px-6 py-4 flex gap-3 items-center">
-                  <LuEye
+                  {/* <LuEye
                     size={20}
                     onClick={() => {
                       console.log(row.id);
                     }}
                     className="cursor-pointer text-primary/80 hover:text-primary"
-                  />
+                  /> */}
                   <button
                     type="button"
                     onClick={() => {
