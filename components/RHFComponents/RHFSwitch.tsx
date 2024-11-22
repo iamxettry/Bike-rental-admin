@@ -14,7 +14,7 @@ const RHFSwitch = <T extends FieldValues>({ name, label }: Props<T>) => {
       control={control}
       name={name}
       render={({ field }) => (
-        <div className="flex items-center space-x-2 gap-5">
+        <div className="grid grid-cols-2 space-x-2 gap-5">
           <label className="text-sm font-medium text-gray-900">{label}</label>
           <Switch
             checked={field.value}
