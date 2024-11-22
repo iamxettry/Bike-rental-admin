@@ -6,6 +6,7 @@ import RHFSelectField from "@/components/RHFComponents/RHFSelectField";
 import RHFNumberField from "@/components/RHFComponents/RHFNumberField1";
 import { Button } from "@mui/material";
 import RHFImageFieldWithPreview from "@/components/RHFComponents/RHFImageFieldWithPreview";
+import { useModal } from "@/hooks/useModalStore";
 
 const BikeForm = () => {
   const {
@@ -13,6 +14,7 @@ const BikeForm = () => {
     formState: { isSubmitting },
     watch,
   } = useBikeSubmit();
+  const { bikeId } = useModal();
   useEffect(() => {
     const sub = watch((value) => console.log(value));
     return () => sub.unsubscribe();
@@ -46,9 +48,16 @@ const BikeForm = () => {
 
       <RHFImageFieldWithPreview<bikeType> name="image" label="Select Image" />
 
-      <Button variant="contained" type="submit" className="!bg-primary">
-        {isSubmitting ? "Submitting..." : "Submit"}
-      </Button>
+      {bikeId ? (
+        <Button variant="contained" type="submit" className="!bg-primary">
+          {isSubmitting ? "Updating..." : "Update"}
+        </Button>
+      ) : (
+        <Button variant="contained" type="submit" className="!bg-primary">
+          {isSubmitting ? "Submitting..." : "Submit"}
+        </Button>
+      )}
+
       <span></span>
     </form>
   );

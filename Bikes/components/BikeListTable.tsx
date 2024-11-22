@@ -14,52 +14,9 @@ type BikeListTableProps = {
 };
 
 const BikeListTable = ({ data }: BikeListTableProps) => {
-  const { handleFeaturedStatus, reset } = useBikeSubmit();
-  const { openDrawer, bikeId, setBikeId, openModal, setPreview } = useModal();
+  const { handleFeaturedStatus, fetchAndSetBikeData } = useBikeSubmit();
+  const { openDrawer, setBikeId, openModal } = useModal();
 
-  const { data: BikeData, isFetched } = useQuery({
-    queryFn: async () => await BikeServices.getBikeById(bikeId),
-    queryKey: ["get-one-bike"],
-    enabled: !!bikeId,
-  });
-
-  // useEffect(() => {
-  //   if (bikeId && BikeData && isFetched) {
-  //     reset({
-  //       name: BikeData.name ?? "",
-  //       brand: BikeData.brand ?? "",
-  //       model: BikeData.model ?? "",
-  //       year: BikeData.year ?? 0,
-  //       color: BikeData.color ?? "",
-  //       price: BikeData.price ?? 0,
-  //       start:
-  //         (BikeData.start as
-  //           | "SELF_START_ONLY"
-  //           | "KICK_AND_SELF_START"
-  //           | "KICK_START_ONLY") ?? "SELF_START_ONLY",
-  //       engine: BikeData.engine ?? "",
-  //       distance: BikeData.distance ?? "",
-  //       description: BikeData.description ?? "",
-  //       image: null,
-  //     });
-  //     setPreview(BikeData.image ?? null);
-  //   } else if (!bikeId) {
-  //     reset({
-  //       name: "",
-  //       brand: "",
-  //       model: "",
-  //       year: 2021,
-  //       color: "",
-  //       price: 0,
-  //       start: "SELF_START_ONLY",
-  //       engine: "",
-  //       distance: "",
-  //       description: "",
-  //       image: null,
-  //     });
-  //     setPreview(null);
-  //   }
-  // }, [bikeId, BikeData, reset]);
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
@@ -107,6 +64,7 @@ const BikeListTable = ({ data }: BikeListTableProps) => {
                     onClick={() => {
                       openDrawer();
                       setBikeId(row.id);
+                      fetchAndSetBikeData(row.id);
                     }}
                   >
                     <LuFileEdit

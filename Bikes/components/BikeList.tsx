@@ -9,7 +9,7 @@ import { useModal } from "@/hooks/useModalStore";
 import Modal from "@/components/common/Modal";
 
 const BikeList = () => {
-  const { isModalOpen, bikeId, closeModal } = useModal();
+  const { isModalOpen, bikeId, setBikeId, closeModal } = useModal();
   const { handleDeleteBike } = useBikeSubmit();
   const {
     data: BikeList,
@@ -18,6 +18,7 @@ const BikeList = () => {
   } = useQuery({
     queryKey: ["BikeList"],
     queryFn: async () => BikeServices.getBikeList(),
+    refetchOnWindowFocus: true,
   });
 
   return (
@@ -41,7 +42,7 @@ const BikeList = () => {
               onClick={() => {
                 handleDeleteBike(bikeId);
                 closeModal();
-                refetch();
+                setBikeId("");
               }}
               className="px-4 py-2 text-sm font-semibold text-white bg-red-500 rounded-md"
             >
