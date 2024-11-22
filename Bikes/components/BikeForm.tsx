@@ -7,6 +7,7 @@ import RHFNumberField from "@/components/RHFComponents/RHFNumberField1";
 import { Button } from "@mui/material";
 import RHFImageFieldWithPreview from "@/components/RHFComponents/RHFImageFieldWithPreview";
 import { useModal } from "@/hooks/useModalStore";
+import RHFSwitch from "@/components/RHFComponents/RHFSwitch";
 
 const BikeForm = () => {
   const {
@@ -43,7 +44,8 @@ const BikeForm = () => {
         <RHFTextField<bikeType> name="engine" label="Engine" />
         <RHFTextField<bikeType> name="distance" label="Distance" />
       </div>
-
+      <RHFSwitch<bikeType> name="isFeatured" label="Featured Bike" />
+      <RHFSwitch<bikeType> name="isAvailable" label="Available " />
       <RHFTextField<bikeType> name="description" label="Description" />
 
       <RHFImageFieldWithPreview<bikeType> name="image" label="Select Image" />
