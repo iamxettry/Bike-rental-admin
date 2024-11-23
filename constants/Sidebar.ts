@@ -173,9 +173,14 @@ export const adminSidebarList = [
       },
       {
         _id: 4,
-        title: "Notifications Settings",
-        path: "/admin/settings/notifications-settings",
+        title: "Locations & Zones",
+        path: "/admin/settings/locations-zones",
       },
+      // {
+      //   _id: 4,
+      //   title: "Notifications Settings",
+      //   path: "/admin/settings/notifications-settings",
+      // },
     ],
   },
 ];
