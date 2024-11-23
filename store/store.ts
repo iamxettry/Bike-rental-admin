@@ -11,7 +11,7 @@ type Action = {
   setBikes: (value: BikeListResponse) => void;
   setIsLoading: (value: boolean) => void;
 };
-export const useBikeStore = create<State & Action>((set) => ({
+export const useStore = create<State & Action>((set) => ({
   // Search Query
   searchQuery: "",
   setSearchQuery: (value) => set(() => ({ searchQuery: value })),
