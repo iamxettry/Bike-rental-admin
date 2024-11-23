@@ -7,7 +7,7 @@ import Notfound from "@/components/common/Notfound";
 import useBikeSubmit from "@/hooks/useBikeSubmit";
 import { useModal } from "@/hooks/useModalStore";
 import Modal from "@/components/common/Modal";
-import { useBikeStore } from "@/store/store";
+import { useStore } from "@/store/store";
 import { useEffect } from "react";
 
 const BikeList = () => {
@@ -23,8 +23,7 @@ const BikeList = () => {
     refetchOnWindowFocus: true,
   });
 
-  const { searchQuery, bikes, isLoading, setIsLoading, setBikes } =
-    useBikeStore();
+  const { searchQuery, bikes, isLoading, setIsLoading, setBikes } = useStore();
 
   useEffect(() => {
     if (searchQuery) {

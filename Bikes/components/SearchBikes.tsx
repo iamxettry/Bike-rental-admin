@@ -1,10 +1,10 @@
 "use client";
 
-import { useBikeStore } from "@/store/store";
+import { useStore } from "@/store/store";
 import { LuSearch } from "react-icons/lu";
 
 const SearchBikes = () => {
-  const { searchQuery, setSearchQuery } = useBikeStore();
+  const { searchQuery, setSearchQuery } = useStore();
   return (
     <div className="  relative">
       <input
