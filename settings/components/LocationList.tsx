@@ -2,13 +2,13 @@
 import { useQuery } from "@tanstack/react-query";
 import Loading from "@/components/utils/Loading";
 import Notfound from "@/components/common/Notfound";
-import useBikeSubmit from "@/hooks/useBikeSubmit";
 import { useModal } from "@/hooks/useModalStore";
 import Modal from "@/components/common/Modal";
 import { useStore } from "@/store/store";
 import { useEffect } from "react";
-import BikeServices from "@/Bikes/services/BikeServices";
-import BikeListTable from "@/Bikes/components/BikeListTable";
+import LocationService from "@/services/LocationServices";
+import useLocationSubmit from "@/hooks/useLocationSubmit";
+import LocationTable from "./LocationTable";
 
 const LocationList = () => {
   const {
@@ -17,50 +17,45 @@ const LocationList = () => {
     setEditId: setLocationId,
     closeModal,
   } = useModal();
-  const { handleDeleteBike } = useBikeSubmit();
+  const { handleDeleteLocation } = useLocationSubmit();
   const {
-    data: BikeList,
+    data: LocationData,
     isFetching,
     refetch,
   } = useQuery({
-    queryKey: ["BikeList"],
-    queryFn: async () => BikeServices.getBikeList(),
+    queryKey: ["get-location-list"],
+    queryFn: async () => LocationService.getLocationList(),
     refetchOnWindowFocus: true,
   });
 
-  const {
-    searchQuery,
-    searchList: LocationList,
-    isLoading,
-    setIsLoading,
-    setSearchList,
-  } = useStore();
+  const { searchQuery, locations, isLoading, setIsLoading, setLocations } =
+    useStore();
 
   useEffect(() => {
     if (searchQuery) {
       setIsLoading(true);
       const timer = setTimeout(async () => {
-        const response = await BikeServices.searchBikes(searchQuery);
+        const response = await LocationService.searchLocation(searchQuery);
         setIsLoading(false);
-        setSearchList(response);
+        setLocations(response);
       }, 500);
       return () => clearTimeout(timer);
     } else {
-      if (BikeList) {
-        setSearchList(BikeList);
+      if (LocationData) {
+        setLocations(LocationData);
         setIsLoading(isFetching);
       }
     }
-  }, [searchQuery, BikeList, isFetching]);
+  }, [searchQuery, LocationData, isFetching]);
 
   return (
     <div className="mt-5">
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <div className="h-96 flex justify-center items-center">
           <Loading />
         </div>
-      ) : LocationList && LocationList?.length > 0 ? (
-        <BikeListTable data={LocationList} />
+      ) : locations && locations?.length > 0 ? (
+        <LocationTable data={locations} />
       ) : (
         <Notfound msg="Result Not Found" />
       )}
@@ -72,7 +67,7 @@ const LocationList = () => {
           <div className="flex justify-end ">
             <button
               onClick={() => {
-                handleDeleteBike(locationId);
+                handleDeleteLocation(locationId);
                 closeModal();
                 setLocationId("");
               }}
