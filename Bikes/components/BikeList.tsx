@@ -55,7 +55,7 @@ const BikeList = () => {
 
   return (
     <div className="mt-5">
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <div className="h-96 flex justify-center items-center">
           <Loading />
         </div>
