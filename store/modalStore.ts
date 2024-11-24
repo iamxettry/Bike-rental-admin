@@ -2,7 +2,7 @@ import { create } from "zustand";
 type State = {
   isDrawerOpen: boolean;
   isModalOpen: boolean;
-  bikeId: string;
+  editId: string;
   preview: string | null;
 };
 
@@ -11,7 +11,7 @@ type Action = {
   closeModal: () => void;
   openDrawer: () => void;
   closeDrawer: () => void;
-  setBikeId: (value: string) => void;
+  setEditId: (value: string) => void;
   setPreview: (value: string | null) => void;
 };
 
@@ -19,10 +19,10 @@ const modalStore = create<State & Action>((set) => ({
   isDrawerOpen: false,
   isModalOpen: false,
   openDrawer: () => set({ isDrawerOpen: true }),
-  closeDrawer: () => set({ isDrawerOpen: false, bikeId: "", preview: null }),
+  closeDrawer: () => set({ isDrawerOpen: false, editId: "", preview: null }),
 
-  bikeId: "",
-  setBikeId: (value) => set({ bikeId: value }),
+  editId: "",
+  setEditId: (value) => set({ editId: value }),
 
   preview: null,
   setPreview: (value) => set({ preview: value }),

@@ -13,7 +13,7 @@ type BikeListTableProps = {
 const BikeListTable = ({ data }: BikeListTableProps) => {
   const { handleFeaturedStatus, fetchAndSetBikeData, handleAvailableStatus } =
     useBikeSubmit();
-  const { openDrawer, setBikeId, openModal } = useModal();
+  const { openDrawer, setEditId: setBikeId, openModal } = useModal();
 
   return (
     <>

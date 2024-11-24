@@ -10,8 +10,8 @@ export const useModal = () => {
     isDrawerOpen,
     openDrawer,
     closeDrawer,
-    bikeId,
-    setBikeId,
+    editId,
+    setEditId,
     preview,
     setPreview,
   } = modalStore();
@@ -23,8 +23,8 @@ export const useModal = () => {
     isDrawerOpen,
     openDrawer,
     closeDrawer,
-    bikeId,
-    setBikeId,
+    editId,
+    setEditId,
     preview,
     setPreview,
   };

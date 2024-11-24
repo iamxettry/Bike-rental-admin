@@ -15,7 +15,7 @@ const BikeForm = () => {
     formState: { isSubmitting },
     watch,
   } = useBikeSubmit();
-  const { bikeId } = useModal();
+  const { editId: bikeId } = useModal();
   useEffect(() => {
     const sub = watch((value) => console.log(value));
     return () => sub.unsubscribe();

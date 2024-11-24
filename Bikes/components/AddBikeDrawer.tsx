@@ -5,7 +5,7 @@ import BikeForm from "./BikeForm";
 import Drawer from "@/components/common/Drawer";
 
 const AddBikeDrawer = () => {
-  const { isDrawerOpen, closeDrawer, bikeId } = useModal();
+  const { isDrawerOpen, closeDrawer, editId: bikeId } = useModal();
   return (
     <>
       {isDrawerOpen && (

@@ -11,7 +11,12 @@ import { useStore } from "@/store/store";
 import { useEffect } from "react";
 
 const BikeList = () => {
-  const { isModalOpen, bikeId, setBikeId, closeModal } = useModal();
+  const {
+    isModalOpen,
+    editId: bikeId,
+    setEditId: setBikeId,
+    closeModal,
+  } = useModal();
   const { handleDeleteBike } = useBikeSubmit();
   const {
     data: BikeList,

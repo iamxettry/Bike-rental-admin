@@ -12,7 +12,13 @@ import { useModal } from "./useModalStore";
 const useBikeSubmit = () => {
   const { handleSubmit, watch, setValue, reset, formState } =
     useFormContext<bikeType>();
-  const { bikeId, setPreview, closeDrawer, closeModal, setBikeId } = useModal();
+  const {
+    editId: bikeId,
+    setPreview,
+    closeDrawer,
+    closeModal,
+    setEditId: setBikeId,
+  } = useModal();
   const watchImage = watch("image");
   const queryClient = useQueryClient();
 

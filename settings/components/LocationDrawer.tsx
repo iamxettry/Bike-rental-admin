@@ -5,16 +5,16 @@ import React from "react";
 import LocationForm from "./LocationForm";
 
 const LocationDrawer = () => {
-  const { isDrawerOpen, closeDrawer, bikeId } = useModal();
+  const { isDrawerOpen, closeDrawer, editId: locationId } = useModal();
   return (
     <>
       {isDrawerOpen && (
         <Drawer
           isOpen={isDrawerOpen}
           onClose={closeDrawer}
-          title={bikeId ? "Edit Location" : "Add New Location "}
+          title={locationId ? "Edit Location" : "Add New Location "}
           //   description={
-          //     bikeId ? "Edit selected Bike" : "Add new  Bike to the system."
+          //     locationId ? "Edit selected Bike" : "Add new  Bike to the system."
           //   }
         >
           <LocationForm />
