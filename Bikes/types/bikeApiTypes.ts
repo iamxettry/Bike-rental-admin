@@ -23,6 +23,7 @@ export type Bike = {
   engine: string;
   distance: string;
   date: string;
+  locations: string[];
 };
 
 // Define the API response type

@@ -23,8 +23,8 @@ const BikeListTable = ({ data }: BikeListTableProps) => {
             <tr>
               <th className="px-6 py-4">Name</th>
               <th className="px-6 py-4">Brand</th>
-              <th className="px-6 py-4">Model</th>
               <th className="px-6 py-4">Color</th>
+              <th className="px-6 py-4">Available Locations</th>
               <th className="px-6 py-4">Is Featured</th>
               <th className="px-6 py-4">Is Available</th>
               <th className="px-6 py-4">Actions</th>
@@ -40,8 +40,18 @@ const BikeListTable = ({ data }: BikeListTableProps) => {
               >
                 <td className="px-6 py-4">{row.name ?? "-"}</td>
                 <td className="px-6 py-4">{row.brand ?? "-"}</td>
-                <td className="px-6 py-4">{row.model ?? "-"}</td>
                 <td className="px-6 py-4">{row.color ?? "-"}</td>
+                <td className="px-6 py-4">
+                  {
+                    <ul className="flex  gap-2 text-xs flex-wrap">
+                      {row.locations.length > 0
+                        ? row.locations.map((location, index) => (
+                            <li key={index}>"{location}"</li>
+                          ))
+                        : "-"}
+                    </ul>
+                  }
+                </td>
                 <td className="px-6 py-4">
                   {row.isFeatured}
                   <Switch
