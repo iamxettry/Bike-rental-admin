@@ -16,6 +16,7 @@ export const bikeSchema = z.object({
   description: z.string().optional(),
   image: z.instanceof(File).nullable().optional(), // Allow null for image
   date: z.string().optional(),
+  locations: z.string().array(),
 });
 
 export type bikeType = z.infer<typeof bikeSchema>;
@@ -35,4 +36,5 @@ export const defaultBikeValues: bikeType = {
   description: "",
   image: new File([], ""),
   date: new Date().toISOString(),
+  locations: [],
 };

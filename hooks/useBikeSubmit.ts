@@ -3,13 +3,19 @@ import { successResponse } from "@/Auth/types/common";
 import BikeServices from "@/Bikes/services/BikeServices";
 import { Bike } from "@/Bikes/types/bikeApiTypes";
 import { bikeType } from "@/Bikes/types/bikeSchema";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useModal } from "./useModalStore";
+import LocationService from "@/services/LocationServices";
+import { useEffect, useState } from "react";
+import { LocationListResponse } from "@/settings/types/locationSchema";
 
 const useBikeSubmit = () => {
+  const [LocationOptions, setLocationOptions] = useState<
+    { label: string; id: string }[]
+  >([]);
   const { handleSubmit, watch, setValue, reset, formState } =
     useFormContext<bikeType>();
   const {
@@ -21,17 +27,41 @@ const useBikeSubmit = () => {
   } = useModal();
   const watchImage = watch("image");
   const queryClient = useQueryClient();
-
+  const { data: locationList } = useQuery({
+    queryKey: ["get-location-list"],
+    queryFn: async () => await LocationService.getLocationList(),
+    select: (data) => data,
+  });
+  useEffect(() => {
+    if (locationList) {
+      const mappedOptions = locationList?.map((item: LocationListResponse) => ({
+        label: item.city,
+        id: item.id,
+      }));
+      setLocationOptions(mappedOptions);
+    }
+  }, [locationList]);
   const fetchAndSetBikeData = async (bikeId: string) => {
     try {
       const bikeData = await BikeServices.getBikeById(bikeId); // Fetch bike data
-      const { id, image, start, rating, engine, distance, ...rest } = bikeData;
+      const {
+        id,
+        image,
+        start,
+        model,
+        rating,
+        engine,
+        distance,
+        locations,
+        ...rest
+      } = bikeData;
 
       if (image) {
         setPreview(image);
       }
       reset({
         ...rest,
+        model: model ?? "",
         rating: rating ? parseFloat(rating) : undefined,
         engine: engine ?? "",
         distance: distance ?? "",
@@ -39,6 +69,7 @@ const useBikeSubmit = () => {
           | "SELF_START_ONLY"
           | "KICK_AND_SELF_START"
           | "KICK_START_ONLY",
+        locations: locations?.map((item) => item.id),
       });
     } catch (error) {
       console.error("Error fetching bike data:", error);
@@ -192,6 +223,7 @@ const useBikeSubmit = () => {
     handleDeleteBike,
     reset,
     fetchAndSetBikeData,
+    LocationOptions,
   };
 };
 

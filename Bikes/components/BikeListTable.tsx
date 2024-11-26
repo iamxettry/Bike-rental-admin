@@ -5,6 +5,7 @@ import { LuEye, LuFileEdit } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 import { useModal } from "@/hooks/useModalStore";
 import useBikeSubmit from "@/hooks/useBikeSubmit";
+import { LocationListResponse } from "@/settings/types/locationSchema";
 
 type BikeListTableProps = {
   data: BikeListResponse;
@@ -44,10 +45,12 @@ const BikeListTable = ({ data }: BikeListTableProps) => {
                 <td className="px-6 py-4">
                   {
                     <ul className="flex  gap-2 text-xs flex-wrap">
-                      {row.locations.length > 0
-                        ? row.locations.map((location, index) => (
-                            <li key={index}>"{location}"</li>
-                          ))
+                      {row?.locations && row?.locations.length > 0
+                        ? row?.locations.map(
+                            (location: LocationListResponse) => (
+                              <li key={location.id}>"{location.city}"</li>
+                            )
+                          )
                         : "-"}
                     </ul>
                   }

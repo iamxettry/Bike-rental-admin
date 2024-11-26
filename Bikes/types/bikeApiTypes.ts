@@ -1,3 +1,5 @@
+import { LocationListResponse } from "@/settings/types/locationSchema";
+
 // Define the features type
 interface BikeFeatures {
   start: string;
@@ -23,7 +25,7 @@ export type Bike = {
   engine: string;
   distance: string;
   date: string;
-  locations: string[];
+  locations: LocationListResponse[];
 };
 
 // Define the API response type

@@ -8,12 +8,14 @@ import { Button } from "@mui/material";
 import RHFImageFieldWithPreview from "@/components/RHFComponents/RHFImageFieldWithPreview";
 import { useModal } from "@/hooks/useModalStore";
 import RHFSwitch from "@/components/RHFComponents/RHFSwitch";
+import RHFAutoComplete from "@/components/RHFComponents/RHFAutoComplete";
 
 const BikeForm = () => {
   const {
     handleSubmit,
     formState: { isSubmitting },
     watch,
+    LocationOptions,
   } = useBikeSubmit();
   const { editId: bikeId } = useModal();
   useEffect(() => {
@@ -21,6 +23,7 @@ const BikeForm = () => {
     return () => sub.unsubscribe();
   }, [watch]);
 
+  console.log("LocationOptions", LocationOptions);
   return (
     <form onSubmit={handleSubmit} className="  grid space-y-4 overflow-y-auto">
       <span></span>
@@ -30,6 +33,11 @@ const BikeForm = () => {
       <RHFNumberField<bikeType> name="year" label="Year" />
       <RHFTextField<bikeType> name="color" label="Color" />
       <RHFNumberField<bikeType> name="price" label="Price" />
+      <RHFAutoComplete<bikeType>
+        name="locations"
+        label="Available Locations"
+        options={LocationOptions}
+      />
       <h1 className="font-semibold text-gray-700">Features</h1>
       <div className=" gap-4 flex -mt-2 ">
         <RHFSelectField<bikeType>
