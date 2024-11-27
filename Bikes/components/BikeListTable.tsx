@@ -23,7 +23,7 @@ const BikeListTable = ({ data }: BikeListTableProps) => {
           <thead className="text-xs text-gray-700 uppercase bg-blue-200 dark:bg-gray-700 dark:text-gray-400 border-b border-gray-300 ">
             <tr>
               <th className="px-6 py-4">Name</th>
-              <th className="px-6 py-4">Brand</th>
+              {/* <th className="px-6 py-4">Brand</th> */}
               <th className="px-6 py-4">Color</th>
               <th className="px-6 py-4">Available Locations</th>
               <th className="px-6 py-4">Is Featured</th>
@@ -40,7 +40,7 @@ const BikeListTable = ({ data }: BikeListTableProps) => {
                 } `}
               >
                 <td className="px-6 py-4">{row.name ?? "-"}</td>
-                <td className="px-6 py-4">{row.brand ?? "-"}</td>
+                {/* <td className="px-6 py-4">{row.brand ?? "-"}</td> */}
                 <td className="px-6 py-4">{row.color ?? "-"}</td>
                 <td className="px-6 py-4">
                   {
