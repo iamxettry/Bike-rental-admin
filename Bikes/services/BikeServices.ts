@@ -49,7 +49,7 @@ const BikeServices = {
       isFeatured: boolean;
     }
   ): Promise<successResponse> => {
-    return requests.patch(`/bike/update/${id}/`, data, {
+    return requests.patch(`/bike/update-status/${id}/`, data, {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
@@ -60,7 +60,7 @@ const BikeServices = {
       isAvailable: boolean;
     }
   ): Promise<successResponse> => {
-    return requests.patch(`/bike/update/${id}/`, data, {
+    return requests.patch(`/bike/update-status/${id}/`, data, {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
