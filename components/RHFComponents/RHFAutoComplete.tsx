@@ -1,6 +1,6 @@
 import { Autocomplete, Box, Checkbox, TextField } from "@mui/material";
 import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
-
+import { orange } from "@mui/material/colors";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckedBoxIcon from "@mui/icons-material/CheckBox";
 import { Option } from "@/types/options";
@@ -43,6 +43,25 @@ const RHFAutoComplete = <T extends FieldValues>({
               error={!!error}
               helperText={error?.message}
               label={label}
+              sx={{
+                "& label.Mui-focused": {
+                  color: orange[700],
+                },
+                "& label": {
+                  color: error && "red",
+                },
+                "& .MuiOutlinedInput-root": {
+                  // "& fieldset": {
+                  //   borderColor: error ? "red" : orange[500],
+                  // },
+                  "&:hover fieldset": {
+                    borderColor: orange[700],
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: orange[700],
+                  },
+                },
+              }}
             />
           )}
           renderOption={(props, option, { selected }) => {
@@ -54,6 +73,12 @@ const RHFAutoComplete = <T extends FieldValues>({
                   icon={<CheckBoxOutlineBlankIcon />}
                   checkedIcon={<CheckedBoxIcon />}
                   checked={selected}
+                  sx={{
+                    color: orange[600],
+                    "&.Mui-checked": {
+                      color: orange[600],
+                    },
+                  }}
                 />
                 {option.label}
               </Box>
