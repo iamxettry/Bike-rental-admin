@@ -49,7 +49,7 @@ const RHFImageFieldWithPreview = <T extends FieldValues>({
             <Box
               sx={{
                 width: "400px",
-                height: "200px",
+                height: "300px",
                 border: "1px solid #ddd",
                 borderRadius: "4px",
                 overflow: "hidden",
