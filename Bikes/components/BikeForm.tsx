@@ -9,6 +9,7 @@ import RHFImageFieldWithPreview from "@/components/RHFComponents/RHFImageFieldWi
 import { useModal } from "@/hooks/useModalStore";
 import RHFSwitch from "@/components/RHFComponents/RHFSwitch";
 import RHFAutoComplete from "@/components/RHFComponents/RHFAutoComplete";
+import RHFTextArea from "@/components/RHFComponents/RHFTextArea";
 
 const BikeForm = () => {
   const {
@@ -54,7 +55,7 @@ const BikeForm = () => {
       </div>
       <RHFSwitch<bikeType> name="isFeatured" label="Featured Bike" />
       <RHFSwitch<bikeType> name="isAvailable" label="Available " />
-      <RHFTextField<bikeType> name="description" label="Description" />
+      <RHFTextArea<bikeType> name="description" label="Description" />
 
       <RHFImageFieldWithPreview<bikeType> name="image" label="Select Image" />
 
