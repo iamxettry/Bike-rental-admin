@@ -1,7 +1,5 @@
-"use client";
 import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
 import { Button, Box, Typography } from "@mui/material";
-import { useState } from "react";
 import { LuX } from "react-icons/lu";
 import Image from "next/image";
 import { useModal } from "@/hooks/useModalStore";

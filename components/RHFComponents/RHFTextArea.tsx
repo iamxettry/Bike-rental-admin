@@ -4,7 +4,7 @@ import { styled } from "@mui/system";
 import { orange } from "@mui/material/colors";
 
 // Styled TextareaAutosize with custom styles
-const StyledTextArea = styled(TextareaAutosize)(({ theme }) => ({
+const StyledTextArea = styled(TextareaAutosize)(() => ({
   minHeight: 60,
   padding: "8px 12px",
   borderRadius: "4px",
@@ -49,7 +49,7 @@ const RHFTextArea = <T extends FieldValues>({
     <Controller
       control={control}
       name={name}
-      render={({ field, fieldState: { error } }) => (
+      render={({ field }) => (
         <>
           <InputLabel>{label}</InputLabel>
           <StyledTextArea
