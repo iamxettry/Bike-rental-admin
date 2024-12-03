@@ -17,6 +17,14 @@ const useLoginSubmit = () => {
       async (resolve, reject) => {
         try {
           const response = await AuthServices.loginUser(data);
+          if (response?.otp_created_at) {
+            sessionStorage.setItem("email", data.email);
+            await Promise.resolve(response);
+            router.push("/auth/login?verifyOtp=true");
+          } else if (response?.success) {
+            await Promise.resolve(response);
+            router.push("/");
+          }
           resolve(response);
         } catch (error) {
           console.log(error);
@@ -36,15 +44,12 @@ const useLoginSubmit = () => {
     await toast.promise(newPromise, {
       loading: "Logging in...",
       success: (response) => {
-        let msg;
-        if (response?.otp_created_at) {
-          sessionStorage.setItem("email", data.email);
-          msg = response?.success || "OTP sent to your email!";
-          router.push("/auth/login?verifyOtp=true");
-        } else {
-          msg = response?.success || "Login successful!";
-          router.push("/");
-        }
+        const msg =
+          response?.success ||
+          (response?.otp_created_at
+            ? "OTP sent to yoresponseur email!"
+            : "Login successful!");
+
         return msg;
       },
       error: (err) => err,
