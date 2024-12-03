@@ -20,7 +20,7 @@ export const authRoutes = ["/login"];
  * @type {string}
  */
 
-export const adminPrefix = "/admin";
+export const adminPrefix = "/";
 
 /**
  * @description Prefix for all auth routes

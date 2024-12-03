@@ -58,9 +58,9 @@ export async function middleware(request: NextRequest) {
   });
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublic = isPublicRoute(nextUrl.pathname);
+  // const isPublic = isPublicRoute(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
-  const isAdminRoute = nextUrl.pathname.startsWith(adminPrefix);
+  // const isAdminRoute = nextUrl.pathname.startsWith(adminPrefix);
   if (isApiAuthRoute) {
     return response;
   }
@@ -72,26 +72,19 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  if (isAdminRoute) {
-    if (!userLoggedIn) {
-      return NextResponse.redirect(new URL("/login", nextUrl));
-    }
-    if (!isSuperuser) {
-      return NextResponse.redirect(new URL("/", nextUrl));
-    }
-  } else if (!userLoggedIn && !isPublic) {
+  if (!userLoggedIn) {
     return NextResponse.redirect(new URL("/login", nextUrl));
   }
-  function isPublicRoute(url: string) {
-    return publicRoutes.some((route: any) => {
-      if (typeof route === "string") {
-        return route === url;
-      } else if (route instanceof RegExp) {
-        return route.test(url);
-      }
-      return false;
-    });
-  }
+  // function isPublicRoute(url: string) {
+  //   return publicRoutes.some((route: any) => {
+  //     if (typeof route === "string") {
+  //       return route === url;
+  //     } else if (route instanceof RegExp) {
+  //       return route.test(url);
+  //     }
+  //     return false;
+  //   });
+  // }
   return response;
 }
 
