@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 
 import AuthServices from "@/services/AuthServices";
 import { useQuery } from "@tanstack/react-query";
+import Loading from "../utils/Loading";
 const Navbar = () => {
   // const [hidden, setHidden] = useState(false);
   // const { scrollY }: { scrollY: MotionValue<number> } = useScroll();
@@ -41,7 +42,7 @@ const Navbar = () => {
               </span>
             </>
           ) : (
-            "Loading..."
+            <Loading />
           )}
         </h1>
       </div>
