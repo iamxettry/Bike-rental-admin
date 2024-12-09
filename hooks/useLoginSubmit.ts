@@ -20,7 +20,7 @@ const useLoginSubmit = () => {
           if (response?.otp_created_at) {
             sessionStorage.setItem("email", data.email);
             await Promise.resolve(response);
-            router.push("/auth/login?verifyOtp=true");
+            router.push("/verify-otp");
           } else if (response?.success) {
             await Promise.resolve(response);
             router.push("/");
