@@ -12,7 +12,7 @@ export const publicRoutes = [];
  * These routes will redirect loggedin users to /settings
  * @type {string[]}
  */
-export const authRoutes = ["/login"];
+export const authRoutes = ["/login", "/verify-otp"];
 
 /**
  * @description Prefix for all admin routes

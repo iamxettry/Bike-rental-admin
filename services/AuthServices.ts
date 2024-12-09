@@ -1,6 +1,7 @@
 import { LoginSchemaType } from "@/Auth/Schema/LoginSchema";
 import configureAxios from "./axiosConfig";
 import { getCookies } from "./getCookies";
+import { VerifyOtpSchemaType } from "@/Auth/Schema/LoginVerifySchema";
 
 const requests = configureAxios();
 
@@ -13,16 +14,13 @@ const AuthServices = {
   },
 
   // verify otp
-  //   verifyOtp: (data: VerifyOtpSchemaType, isloginOtpMode: boolean) => {
-  //     return requests.post(
-  //       `/auth/${isloginOtpMode ? "login/user" : "forgot-password"}/verify-otp/`,
-  //       data
-  //     );
-  //   },
-  //   // verify otp
-  //   resendOtp: (data: { email: string }) => {
-  //     return requests.post(`/auth/resend-otp/`, data);
-  //   },
+  verifyOtp: (data: VerifyOtpSchemaType) => {
+    return requests.post(`/auth/login/user/verify-otp/`, data);
+  },
+  // verify otp
+  resendOtp: (data: { email: string }) => {
+    return requests.post(`/auth/resend-otp/`, data);
+  },
 
   // logout user
   logoutUser: async () => {
