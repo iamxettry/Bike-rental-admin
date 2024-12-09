@@ -7,7 +7,7 @@ import { defaultLoginValues, LoginSchema } from "../Schema/LoginSchema";
 
 const LoginPorvider = () => {
   const methods = useForm({
-    mode: "all",
+    mode: "onBlur",
     resolver: zodResolver(LoginSchema),
     defaultValues: defaultLoginValues,
   });
