@@ -4,8 +4,8 @@ import {
   DialogTitle,
   Description,
 } from "@headlessui/react";
-import { LuXCircle } from "react-icons/lu";
 import { AnimatePresence, motion } from "framer-motion";
+import { LuCircleX } from "react-icons/lu";
 
 type ModalProps = {
   isOpen: boolean;
@@ -48,7 +48,7 @@ const Drawer = ({
               >
                 <div className="shadow-[0px_4px_2px_-2px_rgba(0,0,0,0.1)] p-2">
                   <button onClick={onClose}>
-                    <LuXCircle
+                    <LuCircleX
                       size={24}
                       className=" text-gray-600 hover:text-red-500"
                     />

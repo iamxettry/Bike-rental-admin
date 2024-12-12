@@ -1,8 +1,7 @@
 "use client";
 import { Bike, BikeListResponse } from "../types/bikeApiTypes";
 import { Switch } from "@headlessui/react";
-import { LuEye, LuFileEdit } from "react-icons/lu";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEditDocument } from "react-icons/md";
 import { useModal } from "@/hooks/useModalStore";
 import useBikeSubmit from "@/hooks/useBikeSubmit";
 import { LocationListResponse } from "@/settings/types/locationSchema";
@@ -91,7 +90,7 @@ const BikeListTable = ({ data }: BikeListTableProps) => {
                       fetchAndSetBikeData(row.id);
                     }}
                   >
-                    <LuFileEdit
+                    <MdEditDocument
                       size={20}
                       className="cursor-pointer text-green-600 hover:text-green-700"
                     />

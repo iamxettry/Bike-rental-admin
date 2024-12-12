@@ -4,7 +4,7 @@ import React from "react";
 import Layout from "@/components/Layout";
 import LoginPorvider from "@/Auth/Components/LoginPorvider";
 
-const LoginPage = async () => {
+const LoginPage = () => {
   return (
     <div className="relative h-screen ">
       <div className=" h-screen w-full overflow-hidden">

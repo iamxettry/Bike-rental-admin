@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import React from "react";
-import { LuXCircle } from "react-icons/lu";
+import { LuCircleX } from "react-icons/lu";
 
 type PropsType = {
   title: string;
@@ -28,7 +28,7 @@ const Modal = ({ title, description, children }: PropsType) => {
             {" "}
             <DialogTitle className="text-lg font-bold">{title}</DialogTitle>
             <button onClick={closeModal} className="">
-              <LuXCircle size={24} className="hover:text-red-500" />
+              <LuCircleX size={24} className="hover:text-red-500" />
             </button>
           </div>
           <Description className="text-sm text-gray-500">
