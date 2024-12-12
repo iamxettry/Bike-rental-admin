@@ -35,7 +35,7 @@ const RHFNumberField = <T extends FieldValues>({
           onInput={handleInputChange}
           onChange={(e) => {
             const value = e.target.value;
-            field.onChange(value);
+            field.onChange(value ? parseFloat(value) : undefined); // Convert to number
           }}
           value={field.value || ""}
           sx={{
