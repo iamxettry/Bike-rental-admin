@@ -1,6 +1,5 @@
 "use client";
-import { LuFileEdit } from "react-icons/lu";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEditDocument } from "react-icons/md";
 import { useModal } from "@/hooks/useModalStore";
 import { LocationListResponse } from "../types/locationSchema";
 import useLocationSubmit from "@/hooks/useLocationSubmit";
@@ -49,7 +48,7 @@ const LocationTable = ({ data }: BikeListTableProps) => {
                       fetchAndSetLocationData(row.id);
                     }}
                   >
-                    <LuFileEdit
+                    <MdEditDocument
                       size={20}
                       className="cursor-pointer text-green-600 hover:text-green-700"
                     />
