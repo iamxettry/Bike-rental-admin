@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import dynamic from "next/dynamic";
 
-const DashboardGraphs = dynamic(() => import("@/Bikes/Graphs/DashboardGraphs"));
+const DashboardGraphs = dynamic(() => import("@/components/Graphs/DashboardGraphs"));
 
 export default function Home() {
   return (
