@@ -26,6 +26,7 @@ export type Bike = {
   distance: string;
   date: string;
   locations: LocationListResponse[];
+  status: string;
 };
 
 // Define the API response type

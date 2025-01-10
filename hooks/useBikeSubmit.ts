@@ -53,6 +53,7 @@ const useBikeSubmit = () => {
         engine,
         distance,
         locations,
+        status,
         ...rest
       } = bikeData;
 
@@ -70,6 +71,7 @@ const useBikeSubmit = () => {
           | "KICK_AND_SELF_START"
           | "KICK_START_ONLY",
         locations: locations?.map((item) => item.id),
+        status: status as "AVAILABLE" | "MAINTENANCE" | "IN_USE" | "RESERVED",
       });
     } catch (error) {
       console.error("Error fetching bike data:", error);
@@ -147,6 +149,7 @@ const useBikeSubmit = () => {
         try {
           const response = await BikeServices.updateBikeAvailableStaus(id, {
             isAvailable: bike.isAvailable ? false : true,
+            status: bike.status === "AVAILABLE" ? "MAINTENANCE" : "AVAILABLE",
           });
           resolve(response);
           queryClient.invalidateQueries({ queryKey: ["BikeList"] });
