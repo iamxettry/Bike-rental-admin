@@ -149,7 +149,7 @@ const useBikeSubmit = () => {
         try {
           const response = await BikeServices.updateBikeAvailableStaus(id, {
             isAvailable: bike.isAvailable ? false : true,
-            status: bike.status === "AVAILABLE" ? "MAINTENANCE" : "AVAILABLE",
+            status: bike.isAvailable ? "MAINTENANCE" : "AVAILABLE",
           });
           resolve(response);
           queryClient.invalidateQueries({ queryKey: ["BikeList"] });
