@@ -4,3 +4,12 @@ export type QuickStatsType = {
   todays_revenue: number;
   new_users: number;
 };
+
+export type MonthlyRentalsType = {
+  month: string;
+  rentals: number;
+};
+export type HourlyUsageType = {
+  hour: string;
+  users: number;
+};

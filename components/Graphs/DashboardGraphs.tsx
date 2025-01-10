@@ -40,7 +40,7 @@ import { CheckmarkIcon } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import GraphServices from "@/services/GraphServices";
 import Loading from "../utils/Loading";
-
+import { MonthlyRentalsType, HourlyUsageType } from "@/types/common";
 const graphOption = [
   { id: 1, name: "Line Graph" },
   { id: 2, name: "Bar Graph" },
@@ -98,9 +98,13 @@ const DashboardGraphs = () => {
       ),
     queryKey: ["monthly-rentals", selectedYear],
     select: (data) => data,
-    enabled: true,
   });
-  console.log("MonthlyRentals", MonthlyRentals);
+  const { data: dailyUsage, isLoading: isLoadingDailyUsage } = useQuery({
+    queryFn: async () => await GraphServices.getHourlyUsage(),
+    queryKey: ["hourly-usage"],
+    select: (data) => data,
+  });
+  console.log("dailyUsage", dailyUsage);
 
   const monthlyData = [
     { month: "Jan", rentals: 120 },
@@ -269,7 +273,7 @@ const DashboardGraphs = () => {
                 <ResponsiveContainer width={"100%"} height="100%">
                   <LineChart data={MonthlyRentals}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
+                    <XAxis dataKey="month" />
                     <YAxis
                       tick={{
                         fontSize: "0.75rem",
@@ -314,21 +318,25 @@ const DashboardGraphs = () => {
           </CardHeader>
           <CardContent>
             <div className="h-64">
-              <ResponsiveContainer width={"100%"} height="100%">
-                <LineChart data={hourlyData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="hour" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Line
-                    type="monotone"
-                    dataKey="users"
-                    stroke="#10b981"
-                    strokeWidth={2}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+              {isLoadingDailyUsage ? (
+                <Loading />
+              ) : (
+                <ResponsiveContainer width={"100%"} height="100%">
+                  <LineChart data={dailyUsage || []}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="hour" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line
+                      type="monotone"
+                      dataKey="users"
+                      stroke="#10b981"
+                      strokeWidth={2}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              )}
             </div>
           </CardContent>
         </Card>
