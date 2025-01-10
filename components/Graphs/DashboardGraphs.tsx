@@ -16,6 +16,7 @@ import {
   Pie,
   Cell,
   ComposedChart,
+  Rectangle,
 } from "recharts";
 import {
   Combobox,
@@ -36,17 +37,32 @@ import { useState } from "react";
 import { LuChevronDown } from "react-icons/lu";
 import clsx from "clsx";
 import { CheckmarkIcon } from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import GraphServices from "@/services/GraphServices";
+import Loading from "../utils/Loading";
 
 const graphOption = [
   { id: 1, name: "Line Graph" },
   { id: 2, name: "Bar Graph" },
 ];
+const yearOption = [
+  { id: 1, year: 2024 },
+  { id: 2, year: 2025 },
+];
+
+// get monthly rentals
+
 const DashboardGraphs = () => {
   const [selectedGraph, setSelectedGraph] = useState<{
     id: number;
     name: string;
   } | null>(graphOption[0]);
   const [query, setQuery] = useState("");
+  const [selectedYear, setSelectedYear] = useState<{
+    id: number;
+    year: number;
+  } | null>(yearOption[0]);
+  const [queryYear, setQueryYear] = useState("");
 
   const [chartWidth, setChartWidth] = useState<number | undefined>(undefined);
 
@@ -66,6 +82,26 @@ const DashboardGraphs = () => {
       : graphOption.filter((graph) => {
           return graph.name.toLowerCase().includes(query.toLowerCase());
         });
+  const filteredYear =
+    query === ""
+      ? yearOption
+      : yearOption.filter((yr) => {
+          return yr.year == Number(queryYear);
+        });
+
+  //  Fetch  monthly rental data
+
+  const { data: MonthlyRentals, isLoading: isMonthlyRentalLoading } = useQuery({
+    queryFn: async () =>
+      await GraphServices.getMonthlyRentals(
+        selectedYear ? selectedYear.year : new Date().getFullYear()
+      ),
+    queryKey: ["monthly-rentals", selectedYear],
+    select: (data) => data,
+    enabled: true,
+  });
+  console.log("MonthlyRentals", MonthlyRentals);
+
   const monthlyData = [
     { month: "Jan", rentals: 120 },
     { month: "Feb", rentals: 150 },
@@ -133,11 +169,11 @@ const DashboardGraphs = () => {
       <ContainerContent>
         <Card
           ref={ref}
-          className="col-span-2 shadow-md shadow-indigo-300 overflow-hidden max-w-full max-h-ful"
+          className="col-span-2 shadow-md shadow-indigo-300 overflow-hidden max-w-full max-h-full"
         >
-          <CardHeader className="grid grid-cols-2 place-items-center">
+          <CardHeader className="grid grid-cols-3 place-items-center">
             <CardTitle className=" ">Monthly Rentals</CardTitle>
-            <div className="  text-black ">
+            <div className="  text-black flex gap-2  col-span-2">
               <Combobox<{ id: number; name: string } | null>
                 value={selectedGraph}
                 onChange={(value) => setSelectedGraph(value)}
@@ -168,28 +204,77 @@ const DashboardGraphs = () => {
                     "transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0"
                   )}
                 >
-                  {filteredGraph.map((person) => (
+                  {filteredGraph.map((graph) => (
                     <ComboboxOption
-                      key={person.id}
-                      value={person}
+                      key={graph.id}
+                      value={graph}
                       className="group flex cursor-default items-center gap-2 rounded-md py-1.5 px-3 select-none data-[focus]:bg-white/10"
                     >
                       <CheckmarkIcon className="invisible size-4 fill-white group-data-[selected]:visible" />
-                      <div className="text-sm/6 ">{person.name}</div>
+                      <div className="text-sm/6 ">{graph.name}</div>
+                    </ComboboxOption>
+                  ))}
+                </ComboboxOptions>
+              </Combobox>
+              {/* year combobox */}
+              <Combobox<{ id: number; year: number } | null>
+                value={selectedYear}
+                onChange={(value) => setSelectedYear(value)}
+                onClose={() => setQueryYear("")}
+              >
+                <div className="relative">
+                  <ComboboxInput
+                    className={clsx(
+                      "w-full rounded-lg border border-gray-300 bg-white/5 py-1.5 pr-8 pl-3 text-sm/6 ",
+                      "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
+                    )}
+                    displayValue={(yr: { id: number; year: number }) =>
+                      yr ? String(yr.year) : ""
+                    }
+                    readOnly
+                    onChange={(event) => setQueryYear(event.target.value)}
+                  />
+                  <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
+                    <LuChevronDown className="size-4 fill-white/60 group-data-[hover]:fill-white" />
+                  </ComboboxButton>
+                </div>
+
+                <ComboboxOptions
+                  anchor="bottom"
+                  transition
+                  className={clsx(
+                    "w-[var(--input-width)] rounded-xl border border-gray-300 bg-purple-100 p-1 [--anchor-gap:var(--spacing-1)] empty:invisible",
+                    "transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0"
+                  )}
+                >
+                  {filteredYear.map((year) => (
+                    <ComboboxOption
+                      key={year.id}
+                      value={year}
+                      className="group flex cursor-default items-center gap-2 rounded-md py-1.5 px-3 select-none data-[focus]:bg-white/10"
+                    >
+                      <CheckmarkIcon className="invisible size-4 fill-white group-data-[selected]:visible" />
+                      <div className="text-sm/6 ">{year.year}</div>
                     </ComboboxOption>
                   ))}
                 </ComboboxOptions>
               </Combobox>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className=" p-0">
             <div className="h-64 relative">
-              {chartWidth && selectedGraph?.id == 1 ? (
+              {isMonthlyRentalLoading ? (
+                <Loading />
+              ) : chartWidth && selectedGraph?.id == 1 ? (
                 <ResponsiveContainer width={"100%"} height="100%">
-                  <LineChart data={bikeUsageData}>
+                  <LineChart data={MonthlyRentals}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
-                    <YAxis />
+                    <YAxis
+                      tick={{
+                        fontSize: "0.75rem",
+                      }}
+                    />
                     <Tooltip />
                     <Legend />
                     <Line
@@ -202,13 +287,21 @@ const DashboardGraphs = () => {
                 </ResponsiveContainer>
               ) : (
                 <ResponsiveContainer width={"100%"} height="100%">
-                  <BarChart data={monthlyData}>
+                  <BarChart data={MonthlyRentals}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="month" />
-                    <YAxis />
+                    <YAxis
+                      tick={{
+                        fontSize: "0.75rem",
+                      }}
+                    />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="rentals" fill="#8804fc " />
+                    <Bar
+                      dataKey="rentals"
+                      fill="#8804fc "
+                      activeBar={<Rectangle fill="pink" stroke="blue" />}
+                    />
                   </BarChart>
                 </ResponsiveContainer>
               )}

@@ -10,6 +10,13 @@ const GraphServices = {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
+
+  // Get Monthly rentals
+  getMonthlyRentals: async (year: number | null) => {
+    return requests.get(`common/monthly-rentals/?year=${year}`, {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
 };
 
 export default GraphServices;
