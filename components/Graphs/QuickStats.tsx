@@ -34,7 +34,7 @@ const QuickStats = async () => {
               Today's Revenue
             </p>
             <p className="text-2xl font-bold">
-              $ {getQuickStats?.todays_revenue}{" "}
+              Rs {getQuickStats?.todays_revenue}{" "}
             </p>
           </div>
           <div className="p-4 bg-purple-200 rounded-lg">
