@@ -100,6 +100,7 @@ const DashboardGraphs = () => {
     queryKey: ["monthly-rentals", selectedYear],
     select: (data) => data,
   });
+  // Fetch  daily usage data
   const { data: dailyUsage, isLoading: isLoadingDailyUsage } = useQuery({
     queryFn: async () => await GraphServices.getHourlyUsage(),
     queryKey: ["hourly-usage"],
@@ -120,6 +121,7 @@ const DashboardGraphs = () => {
       select: (data) => data,
     }
   );
+  // get payment methods
   const { data: paymentMethods, isLoading: isPaymentLoading } = useQuery({
     queryFn: async () => await GraphServices.getPaymentMethods(),
     queryKey: ["payment-methods"],
