@@ -27,3 +27,10 @@ export type MonthlyRevenueRentalsType = {
   revenue: number;
   rentals: number;
 };
+
+export type PaymentMethodsType = {
+  credit_card: number;
+  debit_card: number;
+  digital_wallet: number;
+  cash: number;
+};

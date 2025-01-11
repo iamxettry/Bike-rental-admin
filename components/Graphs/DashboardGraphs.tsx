@@ -119,22 +119,12 @@ const DashboardGraphs = () => {
       select: (data) => data,
     }
   );
+  const { data: paymentMethods, isLoading: isPaymentLoading } = useQuery({
+    queryFn: async () => await GraphServices.getPaymentMethods(),
+    queryKey: ["payment-methods"],
+    select: (data) => data,
+  });
 
-  const revenueData = [
-    { month: "Jan", revenue: 12000, rentals: 120, avgPerRental: 100 },
-    { month: "Feb", revenue: 15000, rentals: 150, avgPerRental: 100 },
-    { month: "Mar", revenue: 20000, rentals: 200, avgPerRental: 100 },
-    { month: "Apr", revenue: 18000, rentals: 180, avgPerRental: 100 },
-    { month: "May", revenue: 25000, rentals: 250, avgPerRental: 100 },
-    { month: "Jun", revenue: 30000, rentals: 300, avgPerRental: 100 },
-  ];
-
-  const paymentMethods = [
-    { name: "Credit Card", value: 60 },
-    { name: "Debit Card", value: 25 },
-    { name: "Digital Wallet", value: 10 },
-    { name: "Cash", value: 5 },
-  ];
   const userActivityData = [
     { name: "Mon", active: 120, new: 20 },
     { name: "Tue", active: 150, new: 25 },
@@ -324,29 +314,33 @@ const DashboardGraphs = () => {
           </CardHeader>
           <CardContent>
             <div className="h-64">
-              <ResponsiveContainer width={"100%"} height="100%">
-                <PieChart>
-                  <Pie
-                    data={bikeStatus}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    paddingAngle={5}
-                    dataKey="value"
-                  >
-                    {bikeStatus?.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+              {isBikeStatusLoading ? (
+                <Loading />
+              ) : (
+                <ResponsiveContainer width={"100%"} height="100%">
+                  <PieChart>
+                    <Pie
+                      data={bikeStatus}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {bikeStatus?.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -356,23 +350,27 @@ const DashboardGraphs = () => {
           </CardHeader>
           <CardContent>
             <div className="h-64">
-              <ResponsiveContainer width={"100%"} height="100%">
-                <ComposedChart data={monthlyRevenueRentals}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis yAxisId="left" />
-                  <YAxis yAxisId="right" orientation="right" />
-                  <Tooltip />
-                  <Legend />
-                  <Bar yAxisId="left" dataKey="revenue" fill="#ea580cff" />
-                  <Line
-                    yAxisId="right"
-                    type="monotone"
-                    dataKey="rentals"
-                    stroke="#8804fc"
-                  />
-                </ComposedChart>
-              </ResponsiveContainer>
+              {isRevenueLoading ? (
+                <Loading />
+              ) : (
+                <ResponsiveContainer width={"100%"} height="100%">
+                  <ComposedChart data={monthlyRevenueRentals}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="month" />
+                    <YAxis yAxisId="left" />
+                    <YAxis yAxisId="right" orientation="right" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar yAxisId="left" dataKey="revenue" fill="#ea580cff" />
+                    <Line
+                      yAxisId="right"
+                      type="monotone"
+                      dataKey="rentals"
+                      stroke="#8804fc"
+                    />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -403,29 +401,33 @@ const DashboardGraphs = () => {
           </CardHeader>
           <CardContent>
             <div className="h-64">
-              <ResponsiveContainer width={"100%"} height="100%">
-                <PieChart>
-                  <Pie
-                    data={paymentMethods}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    paddingAngle={5}
-                    dataKey="value"
-                  >
-                    {paymentMethods.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+              {isPaymentLoading ? (
+                <Loading />
+              ) : (
+                <ResponsiveContainer width={"100%"} height="100%">
+                  <PieChart>
+                    <Pie
+                      data={paymentMethods}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {paymentMethods?.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
+                      ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
+              )}
             </div>
           </CardContent>
         </Card>
