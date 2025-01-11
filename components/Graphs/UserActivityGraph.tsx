@@ -26,6 +26,7 @@ import {
 } from "recharts";
 import { getCurrentWeek } from "../../functions/function";
 
+// yearly option
 const yearOption = [
   { id: 1, year: 2025 },
   { id: 2, year: 2026 },
