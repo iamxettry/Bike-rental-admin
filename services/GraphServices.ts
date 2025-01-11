@@ -2,6 +2,7 @@ import {
   BikeDistrubutionType,
   HourlyUsageType,
   MonthlyRentalsType,
+  MonthlyRevenueRentalsType,
   QuickStatsType,
 } from "@/types/common";
 import configureAxios from "./axiosConfig";
@@ -35,6 +36,12 @@ const GraphServices = {
   // Get Bike Distribution
   getBikeDistribution: async (): Promise<BikeDistrubutionType[]> => {
     return requests.get("common/bike-status/", {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+  // Get Monthly revenue and rentals
+  getMonthlyRevenueRentals: async (): Promise<MonthlyRevenueRentalsType[]> => {
+    return requests.get("common/monthly-revenue-rentals/", {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },

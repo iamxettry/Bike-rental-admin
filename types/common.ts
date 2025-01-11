@@ -21,3 +21,9 @@ export type BikeDistrubutionType = {
   under_maintenance: number;
   in_use: number;
 };
+
+export type MonthlyRevenueRentalsType = {
+  month: string;
+  revenue: number;
+  rentals: number;
+};

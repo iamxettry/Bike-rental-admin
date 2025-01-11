@@ -111,15 +111,14 @@ const DashboardGraphs = () => {
     queryKey: ["bike-status"],
     select: (data) => data,
   });
-
-  const bikeUsageData = [
-    { name: "Jan", rentals: 400 },
-    { name: "Feb", rentals: 300 },
-    { name: "Mar", rentals: 600 },
-    { name: "Apr", rentals: 800 },
-    { name: "May", rentals: 1000 },
-    { name: "Jun", rentals: 1200 },
-  ];
+  // Bike Revenue Data
+  const { data: monthlyRevenueRentals, isLoading: isRevenueLoading } = useQuery(
+    {
+      queryFn: async () => await GraphServices.getMonthlyRevenueRentals(),
+      queryKey: ["monthly-revenue-rentals"],
+      select: (data) => data,
+    }
+  );
 
   const revenueData = [
     { month: "Jan", revenue: 12000, rentals: 120, avgPerRental: 100 },
@@ -358,7 +357,7 @@ const DashboardGraphs = () => {
           <CardContent>
             <div className="h-64">
               <ResponsiveContainer width={"100%"} height="100%">
-                <ComposedChart data={revenueData}>
+                <ComposedChart data={monthlyRevenueRentals}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis yAxisId="left" />
