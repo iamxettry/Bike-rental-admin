@@ -58,6 +58,7 @@ const BikeServices = {
     id: string,
     data: {
       isAvailable: boolean;
+      status: string;
     }
   ): Promise<successResponse> => {
     return requests.patch(`/bike/update-status/${id}/`, data, {
