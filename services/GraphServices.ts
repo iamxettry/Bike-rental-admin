@@ -1,4 +1,5 @@
 import {
+  BikeDistrubutionType,
   HourlyUsageType,
   MonthlyRentalsType,
   QuickStatsType,
@@ -27,6 +28,13 @@ const GraphServices = {
   // get Hourly Usage
   getHourlyUsage: async (): Promise<HourlyUsageType[]> => {
     return requests.get("common/hourly-usage/", {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+
+  // Get Bike Distribution
+  getBikeDistribution: async (): Promise<BikeDistrubutionType[]> => {
+    return requests.get("common/bike-status/", {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },

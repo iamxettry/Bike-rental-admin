@@ -13,3 +13,11 @@ export type HourlyUsageType = {
   hour: string;
   users: number;
 };
+
+export type BikeDistrubutionType = {
+  total_bikes: number;
+  available_bikes: number;
+  reserved_bikes: number;
+  under_maintenance: number;
+  in_use: number;
+};

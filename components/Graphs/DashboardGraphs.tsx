@@ -104,34 +104,13 @@ const DashboardGraphs = () => {
     queryKey: ["hourly-usage"],
     select: (data) => data,
   });
-  console.log("dailyUsage", dailyUsage);
-
-  const monthlyData = [
-    { month: "Jan", rentals: 120 },
-    { month: "Feb", rentals: 150 },
-    { month: "Mar", rentals: 200 },
-    { month: "Apr", rentals: 180 },
-    { month: "May", rentals: 250 },
-    { month: "Jun", rentals: 300 },
-  ];
-
-  // Hourly Usage Data
-  const hourlyData = [
-    { hour: "6AM", users: 10 },
-    { hour: "9AM", users: 45 },
-    { hour: "12PM", users: 30 },
-    { hour: "3PM", users: 60 },
-    { hour: "6PM", users: 85 },
-    { hour: "9PM", users: 25 },
-  ];
 
   // Bike Status Data
-  const bikeStatus = [
-    { name: "In Use", value: 45 },
-    { name: "Available", value: 30 },
-    { name: "Maintenance", value: 15 },
-    { name: "Reserved", value: 10 },
-  ];
+  const { data: bikeStatus, isLoading: isBikeStatusLoading } = useQuery({
+    queryFn: async () => await GraphServices.getBikeDistribution(),
+    queryKey: ["bike-status"],
+    select: (data) => data,
+  });
 
   const bikeUsageData = [
     { name: "Jan", rentals: 400 },
@@ -358,7 +337,7 @@ const DashboardGraphs = () => {
                     paddingAngle={5}
                     dataKey="value"
                   >
-                    {bikeStatus.map((entry, index) => (
+                    {bikeStatus?.map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}
                         fill={COLORS[index % COLORS.length]}
