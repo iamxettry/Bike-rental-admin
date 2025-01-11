@@ -34,3 +34,9 @@ export type PaymentMethodsType = {
   digital_wallet: number;
   cash: number;
 };
+
+export type WeeklyUsersType = {
+  name: string;
+  active: number;
+  new: number;
+};

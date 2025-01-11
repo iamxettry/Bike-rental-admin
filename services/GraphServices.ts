@@ -5,6 +5,7 @@ import {
   MonthlyRevenueRentalsType,
   PaymentMethodsType,
   QuickStatsType,
+  WeeklyUsersType,
 } from "@/types/common";
 import configureAxios from "./axiosConfig";
 import { getCookies } from "./getCookies";
@@ -49,6 +50,19 @@ const GraphServices = {
   // Get Payment Methods Distribution
   getPaymentMethods: async (): Promise<PaymentMethodsType[]> => {
     return requests.get("common/payment-methods-stats/", {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+
+  // get weekly users
+  getWeeklyUsers: async (
+    year?: number,
+    week?: number
+  ): Promise<WeeklyUsersType[]> => {
+    const yearParam = year || new Date().getFullYear();
+    const weekParam = week ? `&&week=${week}` : "";
+
+    return requests.get(`common/user-activity/?year=${yearParam}${weekParam}`, {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },

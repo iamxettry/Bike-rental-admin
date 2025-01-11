@@ -41,6 +41,7 @@ import { useQuery } from "@tanstack/react-query";
 import GraphServices from "@/services/GraphServices";
 import Loading from "../utils/Loading";
 import { MonthlyRentalsType, HourlyUsageType } from "@/types/common";
+import UserActivityGraph from "./UserActivityGraph";
 const graphOption = [
   { id: 1, name: "Line Graph" },
   { id: 2, name: "Bar Graph" },
@@ -83,7 +84,7 @@ const DashboardGraphs = () => {
           return graph.name.toLowerCase().includes(query.toLowerCase());
         });
   const filteredYear =
-    query === ""
+    queryYear === ""
       ? yearOption
       : yearOption.filter((yr) => {
           return yr.year == Number(queryYear);
@@ -125,15 +126,6 @@ const DashboardGraphs = () => {
     select: (data) => data,
   });
 
-  const userActivityData = [
-    { name: "Mon", active: 120, new: 20 },
-    { name: "Tue", active: 150, new: 25 },
-    { name: "Wed", active: 180, new: 30 },
-    { name: "Thu", active: 170, new: 22 },
-    { name: "Fri", active: 200, new: 35 },
-    { name: "Sat", active: 250, new: 45 },
-    { name: "Sun", active: 220, new: 40 },
-  ];
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
   return (
     <Container>
@@ -234,7 +226,7 @@ const DashboardGraphs = () => {
             </div>
           </CardHeader>
           <CardContent className=" p-0">
-            <div className="h-64 relative">
+            <div className="h-64 flex justify-center items-center relative">
               {isMonthlyRentalLoading ? (
                 <Loading />
               ) : chartWidth && selectedGraph?.id == 1 ? (
@@ -285,7 +277,7 @@ const DashboardGraphs = () => {
             <CardTitle>Daily Usage Pattern</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64">
+            <div className="h-64 flex justify-center items-center">
               {isLoadingDailyUsage ? (
                 <Loading />
               ) : (
@@ -313,7 +305,7 @@ const DashboardGraphs = () => {
             <CardTitle>Bike Status Distribution</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64">
+            <div className="h-64 flex justify-center items-center">
               {isBikeStatusLoading ? (
                 <Loading />
               ) : (
@@ -349,7 +341,7 @@ const DashboardGraphs = () => {
             <CardTitle>Revenue & Rentals Trend</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64">
+            <div className="h-64 flex justify-center items-center">
               {isRevenueLoading ? (
                 <Loading />
               ) : (
@@ -374,33 +366,14 @@ const DashboardGraphs = () => {
             </div>
           </CardContent>
         </Card>
-        <Card className="col-span-2  shadow-md shadow-indigo-300">
-          <CardHeader>
-            <CardTitle>Revenue & Rentals Trend</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="h-64">
-              <ResponsiveContainer width={"100%"} height="100%">
-                <BarChart data={userActivityData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="active" fill="#3b82f6" name="Active Users" />
-                  <Bar dataKey="new" fill="#10b981" name="New Users" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
-        </Card>
-
+        {/* user Activity graph */}
+        <UserActivityGraph />
         <Card className="col-span-2 bg-blue-100 shadow-md shadow-purple-300">
           <CardHeader>
             <CardTitle>Payment Methods</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64">
+            <div className="h-64 flex justify-center items-center">
               {isPaymentLoading ? (
                 <Loading />
               ) : (
