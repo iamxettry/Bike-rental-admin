@@ -10,6 +10,12 @@ const UserServices = {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },
+
+  getUserStats: async () => {
+    return requests.get("/auth/user-growth-grpah/", {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
 };
 
 export default UserServices;
