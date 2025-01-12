@@ -31,5 +31,11 @@ const RentalServices = {
       }
     );
   },
+  // update rental status
+  updateRentalStatus: async (id: string, data: any) => {
+    return requests.patch(`/rent/bike/admin/update/${id}/`, data, {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
 };
 export default RentalServices;

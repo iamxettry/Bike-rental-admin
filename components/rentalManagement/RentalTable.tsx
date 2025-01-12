@@ -1,3 +1,4 @@
+"use client";
 import {
   AlertTriangle,
   Bike,
@@ -10,6 +11,8 @@ import {
 } from "lucide-react";
 import React from "react";
 import Loading from "../utils/Loading";
+import { useModal } from "@/hooks/useModalStore";
+import { useStore } from "@/store/store";
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleString("en-US", {
@@ -58,6 +61,12 @@ type RentalTableProps = {
   isLoading: boolean;
 };
 const RentalTable = ({ data, isLoading }: RentalTableProps) => {
+  const { openModal } = useModal();
+  const { setRentalData } = useStore();
+  const handleEditRental = (rental: any) => {
+    openModal();
+    setRentalData(rental);
+  };
   if (isLoading) return <Loading />;
   return (
     <>
@@ -191,14 +200,14 @@ const RentalTable = ({ data, isLoading }: RentalTableProps) => {
                     <td className="px-6 py-4 text-sm font-medium">
                       <div className="flex space-x-3">
                         <button
-                          // onClick={() => handleEditRental(rental)}
+                          onClick={() => handleEditRental(rental)}
                           className="text-blue-600 hover:text-blue-900 transition-colors duration-200"
                         >
                           Edit
                         </button>
-                        <button className="text-red-600 hover:text-red-900 transition-colors duration-200">
+                        {/* <button className="text-red-600 hover:text-red-900 transition-colors duration-200">
                           Cancel
-                        </button>
+                        </button> */}
                       </div>
                     </td>
                   </tr>

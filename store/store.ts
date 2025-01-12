@@ -10,6 +10,7 @@ type State = {
   users: User[];
 
   activeView: "all" | "active" | "history";
+  rentalData: any;
 };
 
 type Action = {
@@ -19,6 +20,7 @@ type Action = {
   setIsLoading: (value: boolean) => void;
   setUsers: (value: User[]) => void;
   setActiveView: (value: "all" | "active" | "history") => void;
+  setRentalData: (value: any) => void;
 };
 export const useStore = create<State & Action>((set) => ({
   // Search Query
@@ -43,4 +45,8 @@ export const useStore = create<State & Action>((set) => ({
   //  activeView
   activeView: "all",
   setActiveView: (value) => set(() => ({ activeView: value })),
+
+  // Rental data
+  rentalData: {},
+  setRentalData: (value) => set(() => ({ rentalData: value })),
 }));
