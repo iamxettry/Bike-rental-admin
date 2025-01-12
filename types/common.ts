@@ -66,3 +66,15 @@ export type DashboardQuickStatsType = {
     };
   };
 };
+
+export type User = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  username: string;
+  email_verified: boolean;
+  is_staff: boolean;
+  is_superuser: boolean;
+  date_joined: string; // ISO date string format
+};
