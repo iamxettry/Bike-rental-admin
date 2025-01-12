@@ -11,6 +11,8 @@ type State = {
 
   activeView: "all" | "active" | "history";
   rentalData: any;
+  offset: number;
+  currentPage: number;
 };
 
 type Action = {
@@ -21,6 +23,8 @@ type Action = {
   setUsers: (value: User[]) => void;
   setActiveView: (value: "all" | "active" | "history") => void;
   setRentalData: (value: any) => void;
+  setOffset: (value: number) => void;
+  setCurrentPage: (value: number) => void;
 };
 export const useStore = create<State & Action>((set) => ({
   // Search Query
@@ -49,4 +53,11 @@ export const useStore = create<State & Action>((set) => ({
   // Rental data
   rentalData: {},
   setRentalData: (value) => set(() => ({ rentalData: value })),
+
+  // offset
+  offset: 0,
+  setOffset: (value) => set(() => ({ offset: value })),
+  // currentPage
+  currentPage: 1,
+  setCurrentPage: (value) => set(() => ({ currentPage: value })),
 }));

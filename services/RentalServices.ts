@@ -18,11 +18,15 @@ const RentalServices = {
     rental_status,
     payment_status,
     search_query,
+    limit = 5,
+    offset = 0,
   }: {
     rental?: string;
     rental_status?: string;
     payment_status?: string;
     search_query?: string;
+    limit?: number;
+    offset?: number;
   }) => {
     const rentalParam = rental ? `rental=${rental}` : "";
     const rentalStatus = rental_status
@@ -32,8 +36,9 @@ const RentalServices = {
       ? `&&payment_status=${payment_status}`
       : "";
     const searchQuery = search_query ? `&&search=${search_query}` : "";
+
     return requests.get(
-      `/rent/rentals/?${rentalParam}${rentalStatus}${paymentStatus}${searchQuery}`,
+      `/rent/rentals/?${rentalParam}${rentalStatus}${paymentStatus}${searchQuery}&&limit=${limit}&&offset=${offset}`,
       {
         Authorization: `Bearer ${await getCookies()}`,
       }

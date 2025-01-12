@@ -13,6 +13,7 @@ import React from "react";
 import Loading from "../utils/Loading";
 import { useModal } from "@/hooks/useModalStore";
 import { useStore } from "@/store/store";
+import Pagination from "./Pagination";
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleString("en-US", {
@@ -222,6 +223,7 @@ const RentalTable = ({ data, isLoading }: RentalTableProps) => {
               )}
             </tbody>
           </table>
+          <Pagination count={Number(data?.count)} />
         </div>
       </div>
     </>

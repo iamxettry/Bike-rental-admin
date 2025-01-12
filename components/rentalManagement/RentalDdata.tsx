@@ -18,6 +18,7 @@ const RentalDdata = () => {
     setSearchQuery,
     isLoading: loading,
     rentalData,
+    offset,
   } = useStore();
   const { isModalOpen, closeModal } = useModal();
   const queryClient = useQueryClient();
@@ -35,6 +36,8 @@ const RentalDdata = () => {
         rental_status,
         payment_status,
         search_query: debouncedSearchQuery,
+        offset,
+        limit: 5,
       }),
     queryKey: [
       "rentals",
@@ -43,6 +46,7 @@ const RentalDdata = () => {
       rental_status,
       payment_status,
       closeModal,
+      offset,
     ],
     refetchOnWindowFocus: false,
   });
