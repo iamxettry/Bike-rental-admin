@@ -8,6 +8,8 @@ type State = {
   locations: LocationListResponse[];
   isLoading: boolean;
   users: User[];
+
+  activeView: "all" | "active" | "history";
 };
 
 type Action = {
@@ -16,6 +18,7 @@ type Action = {
   setLocations: (value: LocationListResponse[]) => void;
   setIsLoading: (value: boolean) => void;
   setUsers: (value: User[]) => void;
+  setActiveView: (value: "all" | "active" | "history") => void;
 };
 export const useStore = create<State & Action>((set) => ({
   // Search Query
@@ -36,4 +39,8 @@ export const useStore = create<State & Action>((set) => ({
   // user
   users: [],
   setUsers: (value) => set(() => ({ users: value })),
+
+  //  activeView
+  activeView: "all",
+  setActiveView: (value) => set(() => ({ activeView: value })),
 }));

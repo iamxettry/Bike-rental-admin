@@ -51,28 +51,29 @@ export const adminSidebarList = [
   {
     _id: 4,
     title: "Rental Management",
-    subList: [
-      {
-        _id: 1,
-        title: "All Rentals",
-        path: "/admin/rental-management/all-rentals",
-      },
-      {
-        _id: 2,
-        title: "Active Rentals",
-        path: "/admin/rental-management/active-rentals",
-      },
-      {
-        _id: 3,
-        title: "Rental History",
-        path: "/admin/rental-management/rental-history",
-      },
-      {
-        _id: 4,
-        title: "Upcoming Reservations",
-        path: "/admin/rental-management/upcoming-reservations",
-      },
-    ],
+    path: "/admin/rental-management",
+    // subList: [
+    //   {
+    //     _id: 1,
+    //     title: "All Rentals",
+    //     path: "/admin/rental-management/all-rentals",
+    //   },
+    //   {
+    //     _id: 2,
+    //     title: "Active Rentals",
+    //     path: "/admin/rental-management/active-rentals",
+    //   },
+    //   {
+    //     _id: 3,
+    //     title: "Rental History",
+    //     path: "/admin/rental-management/rental-history",
+    //   },
+    //   {
+    //     _id: 4,
+    //     title: "Upcoming Reservations",
+    //     path: "/admin/rental-management/upcoming-reservations",
+    //   },
+    // ],
   },
   {
     _id: 5,
