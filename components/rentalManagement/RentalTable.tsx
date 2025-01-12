@@ -68,12 +68,12 @@ const RentalTable = ({ data, isLoading }: RentalTableProps) => {
     openModal();
     setRentalData(rental);
   };
-  if (isLoading) return <Loading />;
   return (
     <>
       {/* Rentals List */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden  ">
         <div className="overflow-x-scroll ">
+          {isLoading && <Loading />}
           <table className="min-w-full divide-y divide-gray-200 max-w-3xl">
             <thead className="bg-gray-50">
               <tr>

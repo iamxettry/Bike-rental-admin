@@ -18,8 +18,14 @@ const UserServices = {
   },
 
   //   get all users
-  getAllUsers: async () => {
-    return requests.get("/auth/users/list/", {
+  getAllUsers: async ({
+    limit = 5,
+    offset = 0,
+  }: {
+    limit?: number;
+    offset?: number;
+  }) => {
+    return requests.get(`/auth/users/list/?limit=${limit}&&offset=${offset}`, {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },

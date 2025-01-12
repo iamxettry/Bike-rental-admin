@@ -1,11 +1,12 @@
 "use client";
 import UserServices from "@/services/UserServices";
 import { useQuery } from "@tanstack/react-query";
-import { Search, Users } from "lucide-react";
+import { Search } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Loading from "../utils/Loading";
 import { User } from "@/types/common";
 import { useStore } from "@/store/store";
+import Pagination from "../rentalManagement/Pagination";
 
 const UserList = () => {
   const [count, setCount] = useState(0);
@@ -16,12 +17,17 @@ const UserList = () => {
     isLoading,
     setIsLoading,
     setUsers,
+    offset,
   } = useStore();
 
   //   fetch user list
   const { data, isFetching } = useQuery({
-    queryFn: async () => await UserServices.getAllUsers(),
-    queryKey: ["userList"],
+    queryFn: async () =>
+      await UserServices.getAllUsers({
+        limit: 5,
+        offset,
+      }),
+    queryKey: ["userList", offset],
   });
 
   useEffect(() => {
@@ -132,6 +138,8 @@ const UserList = () => {
               </tbody>
             </table>
           )}
+
+          <Pagination count={count} />
         </div>
       </div>
     </div>
