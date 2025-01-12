@@ -41,11 +41,11 @@ export const adminSidebarList = [
         title: "All Users",
         path: "/admin/user-management",
       },
-      {
-        _id: 2,
-        title: "User Roles & Permissions",
-        path: "/admin/user-management/roles-permissions",
-      },
+      // {
+      //   _id: 2,
+      //   title: "User Roles & Permissions",
+      //   path: "/admin/user-management/roles-permissions",
+      // },
     ],
   },
   {
