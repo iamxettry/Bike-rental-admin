@@ -19,6 +19,8 @@ const RentalDdata = () => {
     isLoading: loading,
     rentalData,
     offset,
+    setCurrentPage,
+    setOffset,
   } = useStore();
   const { isModalOpen, closeModal } = useModal();
   const queryClient = useQueryClient();
@@ -54,6 +56,8 @@ const RentalDdata = () => {
   useEffect(() => {
     setSearchQuery("");
     closeModal();
+    setCurrentPage(1);
+    setOffset(0);
   }, []);
   useEffect(() => {
     if (searchQuery) {

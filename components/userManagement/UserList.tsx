@@ -18,6 +18,8 @@ const UserList = () => {
     setIsLoading,
     setUsers,
     offset,
+    setOffset,
+    setCurrentPage,
   } = useStore();
 
   //   fetch user list
@@ -30,6 +32,10 @@ const UserList = () => {
     queryKey: ["userList", offset],
   });
 
+  useEffect(() => {
+    setOffset(0);
+    setCurrentPage(1);
+  }, []);
   useEffect(() => {
     if (searchQuery) {
       setIsLoading(true);
