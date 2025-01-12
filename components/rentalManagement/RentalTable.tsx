@@ -204,6 +204,13 @@ const RentalTable = ({ data, isLoading }: RentalTableProps) => {
                   </tr>
                 )
               )}
+              {data?.count === 0 && (
+                <tr>
+                  <td colSpan={6} className="text-center py-4 text-gray-500">
+                    No rentals found
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

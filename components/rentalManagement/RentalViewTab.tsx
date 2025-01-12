@@ -20,7 +20,7 @@ const RentalViewTab = () => {
   const { activeView, setActiveView } = useStore();
   return (
     <>
-      <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg mb-6 max-w-2xl">
+      <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg mb-6 max-w-2xl mx-6">
         {rentalTabData.map((tab) => {
           const Icon = tab.icon;
           return (

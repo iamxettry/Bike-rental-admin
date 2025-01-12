@@ -12,7 +12,7 @@ const page = () => {
             Rental Management
           </h1>
           <p className="mt-2 text-sm text-gray-600">
-            Manage and monitor all bike rentals across your locations
+            Manage and monitor all bike rentals
           </p>
         </div>
       </div>

@@ -28,8 +28,18 @@ const BikeList = () => {
     refetchOnWindowFocus: true,
   });
 
-  const { searchQuery, bikes, isLoading, setIsLoading, setBikes } = useStore();
+  const {
+    searchQuery,
+    setSearchQuery,
+    bikes,
+    isLoading,
+    setIsLoading,
+    setBikes,
+  } = useStore();
 
+  useEffect(() => {
+    setSearchQuery("");
+  }, []);
   useEffect(() => {
     if (searchQuery) {
       setIsLoading(true);
