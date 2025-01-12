@@ -9,6 +9,7 @@ import {
   XCircle,
 } from "lucide-react";
 import React from "react";
+import Loading from "../utils/Loading";
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleString("en-US", {
@@ -57,7 +58,7 @@ type RentalTableProps = {
   isLoading: boolean;
 };
 const RentalTable = ({ data, isLoading }: RentalTableProps) => {
-  console.log(data, "data");
+  if (isLoading) return <Loading />;
   return (
     <>
       {/* Rentals List */}
