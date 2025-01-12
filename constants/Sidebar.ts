@@ -39,15 +39,10 @@ export const adminSidebarList = [
       {
         _id: 1,
         title: "All Users",
-        path: "/admin/user-management/all-users",
+        path: "/admin/user-management",
       },
       {
         _id: 2,
-        title: "Add New User",
-        path: "/admin/user-management/add-user",
-      },
-      {
-        _id: 3,
         title: "User Roles & Permissions",
         path: "/admin/user-management/roles-permissions",
       },

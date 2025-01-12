@@ -40,3 +40,29 @@ export type WeeklyUsersType = {
   active: number;
   new: number;
 };
+
+// User management
+export type DashboardQuickStatsType = {
+  data: {
+    total_users: {
+      title: string;
+      value: number;
+      change: number;
+    };
+    verified_users: {
+      title: string;
+      value: number;
+      change: number;
+    };
+    staff_users: {
+      title: string;
+      value: number;
+      change: number;
+    };
+    pending_verification: {
+      title: string;
+      value: number;
+      change: number;
+    };
+  };
+};
