@@ -1,9 +1,17 @@
+import { RentalQuickStatsType } from "@/types/common";
 import configureAxios from "./axiosConfig";
 import { getCookies } from "./getCookies";
 
 const requests = configureAxios();
 
 const RentalServices = {
+  // Quick stats
+  getQuickStats: async (): Promise<RentalQuickStatsType> => {
+    return requests.get("/rent/rentals-stats/", {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+
   // get all rentals
   getRentals: async ({
     rental,

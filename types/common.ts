@@ -91,3 +91,13 @@ export interface CreateGroup {
   name: string;
   permissions: Permission[];
 }
+
+// Rental Quick stats
+export type RentalQuickStatsType = {
+  total_rentals: number;
+  pending_rentals: number;
+  active_rentals: number;
+  completed_rentals: number;
+  cancelled_rentals: number;
+  overdue_rentals: number;
+};
