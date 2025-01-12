@@ -1,4 +1,4 @@
-import { DashboardQuickStatsType, User } from "@/types/common";
+import { DashboardQuickStatsType, CreateGroup } from "@/types/common";
 import configureAxios from "./axiosConfig";
 import { getCookies } from "./getCookies";
 
@@ -27,6 +27,13 @@ const UserServices = {
   //   search users
   searchUsers: async (query: string) => {
     return requests.get(`/auth/user-search/?search=${query}`, {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
+  },
+
+  // Create roles
+  createUserRole: async (data: CreateGroup) => {
+    return requests.post("/auth/roles/", data, {
       Authorization: `Bearer ${await getCookies()}`,
     });
   },

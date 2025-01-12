@@ -78,3 +78,16 @@ export type User = {
   is_superuser: boolean;
   date_joined: string; // ISO date string format
 };
+
+// permission
+export interface Permission {
+  id: number;
+  name: string;
+  codename: string;
+  content_type: number;
+}
+// Create roles
+export interface CreateGroup {
+  name: string;
+  permissions: Permission[];
+}
