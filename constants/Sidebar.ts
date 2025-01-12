@@ -78,28 +78,29 @@ export const adminSidebarList = [
   {
     _id: 5,
     title: "Billing & Payments",
-    subList: [
-      {
-        _id: 1,
-        title: "All Payments",
-        path: "/admin/billing-payments/all-payments",
-      },
-      {
-        _id: 2,
-        title: "Payment History",
-        path: "/admin/billing-payments/payment-history",
-      },
-      {
-        _id: 3,
-        title: "Invoices",
-        path: "/admin/billing-payments/invoices",
-      },
-      {
-        _id: 4,
-        title: "Refunds & Adjustments",
-        path: "/admin/billing-payments/refunds-adjustments",
-      },
-    ],
+    path: "/admin/billing-payments",
+    // subList: [
+    //   {
+    //     _id: 1,
+    //     title: "All Payments",
+    //     path: "/admin/billing-payments/all-payments",
+    //   },
+    //   {
+    //     _id: 2,
+    //     title: "Payment History",
+    //     path: "/admin/billing-payments/payment-history",
+    //   },
+    //   {
+    //     _id: 3,
+    //     title: "Invoices",
+    //     path: "/admin/billing-payments/invoices",
+    //   },
+    //   {
+    //     _id: 4,
+    //     title: "Refunds & Adjustments",
+    //     path: "/admin/billing-payments/refunds-adjustments",
+    //   },
+    // ],
   },
   {
     _id: 6,

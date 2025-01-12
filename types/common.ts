@@ -101,3 +101,28 @@ export type RentalQuickStatsType = {
   cancelled_rentals: number;
   overdue_rentals: number;
 };
+
+// Payment quick stats
+export type PaymentQuickStatsType = {
+  total_payments: number;
+  pending_payments: number;
+  successful_payments: number;
+  failed_payments: number;
+};
+export type PaymentHistoryType = {
+  month: string;
+  rentals: number;
+  amount: number;
+};
+
+export type Payment = {
+  id: string; // UUID as a string
+  total_amount: number; // Total payment amount
+  amount_paid: number; // Amount that has been paid
+  remaining_amount: number; // Remaining amount to be paid
+  product_id: string; // Associated product ID (UUID format)
+  transaction_id: string; // Transaction identifier
+  status: "PENDING" | "SUCCESS" | "FAILED"; // Payment status with specific allowed values
+  created_at: string; // ISO 8601 timestamp string
+  payment_date: string;
+};
