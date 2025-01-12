@@ -3,7 +3,7 @@
 import { useStore } from "@/store/store";
 import React, { useEffect, useState } from "react";
 import RentalTable from "./RentalTable";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import RentalServices from "@/services/RentalServices";
 import Search from "../common/Search";
 import { ChevronDown, XCircle } from "lucide-react";
@@ -20,6 +20,7 @@ const RentalDdata = () => {
     rentalData,
   } = useStore();
   const { isModalOpen, closeModal } = useModal();
+  const queryClient = useQueryClient();
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
   const [rental_status, setRentalStatus] = useState("");
@@ -41,6 +42,7 @@ const RentalDdata = () => {
       debouncedSearchQuery,
       rental_status,
       payment_status,
+      closeModal,
     ],
     refetchOnWindowFocus: false,
   });
@@ -63,7 +65,6 @@ const RentalDdata = () => {
     }
   }, [searchQuery, isFetching]);
 
-  console.log(updatedPaymentStatus, updatedRentalStatus);
   const handleUpdateStatus = async () => {
     const newPromise: Promise<string> = new Promise(async (resolve, reject) => {
       try {
@@ -79,6 +80,11 @@ const RentalDdata = () => {
           }
         );
         closeModal();
+
+        // refetch data
+        queryClient.invalidateQueries({
+          queryKey: ["rentals"],
+        });
         resolve(response?.message);
       } catch (error) {
         reject("Something went wrong");
