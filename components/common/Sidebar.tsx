@@ -6,8 +6,9 @@ import LogOut from "./LogOut";
 
 const Sidebar = () => {
   return (
-    <div className="  h-full ">
-      <div className="bg-blue-200">
+    <div className="fixed -top-1 left-0 h-full w-[270] bg-blue-200 flex flex-col">
+      {/* Logo Section */}
+      <div>
         <Image
           src={WithMyBike}
           width={400}
@@ -16,8 +17,14 @@ const Sidebar = () => {
           className="w-full object-cover"
         />
       </div>
-      <div className="p-4  bg-blue-200 h-full">
+
+      {/* Sidebar List */}
+      <div className="flex-grow p-4">
         <SidebarList />
+      </div>
+
+      {/* Logout Button */}
+      <div className="mb-4">
         <LogOut />
       </div>
     </div>

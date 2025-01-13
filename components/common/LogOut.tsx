@@ -43,7 +43,7 @@ const LogOut = () => {
     });
   };
   return (
-    <div className="py-2  px-4 rounded-md bg-primary text-white mt-16  ">
+    <div className="py-2  px-4 mx-5 rounded-md bg-primary text-white mt-16  ">
       <button
         type="button"
         onClick={handleLogout}
