@@ -29,7 +29,7 @@ export type SystemAlert = {
   id?: string; // UUID (optional for creation)
   title: string;
   description: string;
-  date_time: string; // ISO timestamp
+  date_time?: string; // ISO timestamp
   status: "critical" | "resolved" | "upcoming";
 };
 

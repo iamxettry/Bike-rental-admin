@@ -76,7 +76,7 @@ const useFAQSubmit = () => {
         setIsLoading(false);
       }
 
-      toast.promise(newPromise, {
+      await toast.promise(newPromise, {
         loading: "Loading..",
         success: (res) => res,
         error: (err) => err || "Failed to create/update FAQ",
@@ -100,36 +100,40 @@ const useFAQSubmit = () => {
 
   // Delete FAQ
   const deleteFAQ = async (faqId: string) => {
-    const newPromise: Promise<string> = new Promise(async (resolve, reject) => {
-      try {
-        setIsLoading(true);
-        await SupportServices.deleteFAQ(faqId);
-        queryClient.invalidateQueries({
-          queryKey: ["faqs"],
-        }); // Refresh FAQs list after deletion
-        resolve("FAQ deleted successfully");
-      } catch (error) {
-        if (error instanceof AxiosError && error.response?.data) {
-          const errMsg =
-            error?.response?.data?.detail || error?.response?.data?.data;
-          setError(errMsg);
-          reject(errMsg);
-        } else if (error instanceof Error) {
-          reject(error?.message);
-          setError(error.message);
-        } else {
-          setError("Network Error!!");
-          reject("Network Error!!");
+    if (window.confirm("Are you sure you want to delete this issue?")) {
+      const newPromise: Promise<string> = new Promise(
+        async (resolve, reject) => {
+          try {
+            setIsLoading(true);
+            await SupportServices.deleteFAQ(faqId);
+            queryClient.invalidateQueries({
+              queryKey: ["faqs"],
+            }); // Refresh FAQs list after deletion
+            resolve("FAQ deleted successfully");
+          } catch (error) {
+            if (error instanceof AxiosError && error.response?.data) {
+              const errMsg =
+                error?.response?.data?.detail || error?.response?.data?.data;
+              setError(errMsg);
+              reject(errMsg);
+            } else if (error instanceof Error) {
+              reject(error?.message);
+              setError(error.message);
+            } else {
+              setError("Network Error!!");
+              reject("Network Error!!");
+            }
+          } finally {
+            setIsLoading(false);
+          }
         }
-      } finally {
-        setIsLoading(false);
-      }
-    });
-    toast.promise(newPromise, {
-      loading: "Loading..",
-      success: (res) => res,
-      error: (err) => err || "Failed to delete FAQ",
-    });
+      );
+      await toast.promise(newPromise, {
+        loading: "Loading..",
+        success: (res) => res,
+        error: (err) => err || "Failed to delete FAQ",
+      });
+    }
   };
 
   return {
