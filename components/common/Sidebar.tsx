@@ -6,7 +6,7 @@ import LogOut from "./LogOut";
 
 const Sidebar = () => {
   return (
-    <div className="fixed -top-1 left-0 h-full w-[270] bg-blue-200 flex flex-col">
+    <div className="fixed -top-1 left-0 h-full w-[270] bg-blue-200 flex flex-col overflow-y-scroll scrollbar-thin  ">
       {/* Logo Section */}
       <div>
         <Image
