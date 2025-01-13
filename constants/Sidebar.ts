@@ -153,21 +153,21 @@ export const adminSidebarList = [
     _id: 8,
     title: "Settings",
     subList: [
-      {
-        _id: 1,
-        title: "General Settings",
-        path: "/admin/settings/general-settings",
-      },
-      {
-        _id: 2,
-        title: "Manage Subscription Plans",
-        path: "/admin/settings/subscription-plans",
-      },
-      {
-        _id: 3,
-        title: "Payment Settings",
-        path: "/admin/settings/payment-settings",
-      },
+      // {
+      //   _id: 1,
+      //   title: "General Settings",
+      //   path: "/admin/settings/general-settings",
+      // },
+      // {
+      //   _id: 2,
+      //   title: "Manage Subscription Plans",
+      //   path: "/admin/settings/subscription-plans",
+      // },
+      // {
+      //   _id: 3,
+      //   title: "Payment Settings",
+      //   path: "/admin/settings/payment-settings",
+      // },
       {
         _id: 4,
         title: "Locations & Zones",
