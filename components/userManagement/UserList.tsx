@@ -1,12 +1,12 @@
 "use client";
 import UserServices from "@/services/UserServices";
 import { useQuery } from "@tanstack/react-query";
-import { Search } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Loading from "../utils/Loading";
 import { User } from "@/types/common";
 import { useStore } from "@/store/store";
 import Pagination from "../rentalManagement/Pagination";
+import Search from "../common/Search";
 
 const UserList = () => {
   const [count, setCount] = useState(0);
@@ -62,14 +62,7 @@ const UserList = () => {
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">User List</h2>
           <div className="relative">
-            <input
-              type="text"
-              placeholder="Search users..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}
-              className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <Search className="w-5 h-5 text-gray-400 absolute left-3 top-2.5" />
+            <Search placeholder="Search users..." />
           </div>
         </div>
         <div className="overflow-x-auto">
