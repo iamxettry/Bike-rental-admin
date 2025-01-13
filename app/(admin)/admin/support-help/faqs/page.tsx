@@ -10,6 +10,7 @@ import { useStore } from "@/store/store";
 import SupportServices from "@/services/SupportServices";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "@/components/utils/Loading";
+import QuillEditor from "@/components/common/QuillEditor";
 
 const FAQAdminPage = () => {
   const { searchQuery, setSearchQuery, setIsLoading, isLoading } = useStore();
@@ -19,7 +20,8 @@ const FAQAdminPage = () => {
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
   const [status, setStatus] = useState("all");
 
-  const { handleSubmit, faqs, setFaqs, deleteFAQ } = useFAQSubmit();
+  const { handleSubmit, faqs, setFaqs, deleteFAQ, answer, setAnswer } =
+    useFAQSubmit();
   const handleAdd = () => {
     setCurrentFaq({ question: "", answer: "", status: "draft" });
     openModal();
@@ -58,9 +60,17 @@ const FAQAdminPage = () => {
   }, [data]);
   const handleEdit = (faq: FAQ) => {
     setCurrentFaq(faq);
+    setAnswer(faq.answer);
     setIsEdit(true);
     openModal();
   };
+  useEffect(() => {
+    if (isModalOpen) {
+      setAnswer(currentFaq?.answer || "");
+    } else {
+      setAnswer("");
+    }
+  }, [isModalOpen]);
 
   return (
     <div className="p-6">
@@ -200,12 +210,8 @@ const FAQAdminPage = () => {
               </div>
               <div>
                 <label className="block mb-2">Answer</label>
-                <textarea
-                  name="answer"
-                  placeholder="Enter answer"
-                  defaultValue={currentFaq?.answer}
-                  className="w-full p-2 border rounded h-32 outline-none  border-gray-400"
-                />
+
+                <QuillEditor value={answer} onChange={setAnswer} />
               </div>
               <div>
                 <label className="block mb-2">Status</label>

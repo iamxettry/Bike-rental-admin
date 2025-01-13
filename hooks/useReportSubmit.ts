@@ -10,6 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 const useReportSubmit = () => {
   const { closeModal } = useModal();
   const [isLoading, setIsLoading] = useState(false);
+  const [description, setDescription] = useState("");
   const [error, setError] = useState<string | null>(null);
   const queryClient = useQueryClient();
   // Handle Submit for Creating or Updating FAQ
@@ -25,7 +26,7 @@ const useReportSubmit = () => {
       toast.error("Subject is required");
       return;
     }
-    if (!(e.target as any).description.value) {
+    if (description == "") {
       toast.error("Description is required");
       return;
     }
@@ -33,7 +34,7 @@ const useReportSubmit = () => {
     const formData: ReportIssue = {
       category: (e.target as any).category.value,
       subject: (e.target as any).subject.value,
-      description: (e.target as any).description.value,
+      description: description,
     };
 
     const newPromise: Promise<string> = new Promise(async (resolve, reject) => {
@@ -124,6 +125,8 @@ const useReportSubmit = () => {
   return {
     isLoading,
     error,
+    description,
+    setDescription,
     handleSubmit,
     deleteReport,
   };

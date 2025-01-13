@@ -9,6 +9,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 const useFAQSubmit = () => {
   const { closeModal } = useModal();
+  const [answer, setAnswer] = useState("");
+
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -26,14 +28,14 @@ const useFAQSubmit = () => {
       toast.error("Question is required");
       return;
     }
-    if (!(e.target as any).answer.value) {
+    if (answer === "") {
       toast.error("Answer is required");
       return;
     }
 
     const formData: FAQ = {
       question: (e.target as any).question.value,
-      answer: (e.target as any).answer.value,
+      answer: answer,
       status: (e.target as any).status.value,
     };
 
@@ -142,7 +144,8 @@ const useFAQSubmit = () => {
     error,
     setFaqs,
     handleSubmit,
-
+    answer,
+    setAnswer,
     deleteFAQ,
   };
 };

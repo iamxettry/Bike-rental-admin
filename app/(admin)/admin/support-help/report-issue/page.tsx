@@ -10,9 +10,11 @@ import { ReportIssue } from "@/types/SupporTypes";
 import { useModal } from "@/hooks/useModalStore";
 import { useStore } from "@/store/store";
 import Search from "@/components/common/Search";
+import QuillEditor from "@/components/common/QuillEditor";
 
 const ReportIssueAdmin = () => {
-  const { handleSubmit, deleteReport } = useReportSubmit();
+  const { handleSubmit, deleteReport, setDescription, description } =
+    useReportSubmit();
   const { isModalOpen, openModal, closeModal } = useModal();
   const { searchQuery, setSearchQuery, setIsLoading, isLoading } = useStore();
   const [isEdit, setIsEdit] = useState(false);
@@ -56,6 +58,13 @@ const ReportIssueAdmin = () => {
     closeModal();
   }, []);
 
+  useEffect(() => {
+    if (isModalOpen) {
+      setDescription(currentIssue?.description || "");
+    } else {
+      setDescription("");
+    }
+  }, [isModalOpen]);
   return (
     <div className="p-6">
       <Card>
@@ -134,7 +143,10 @@ const ReportIssueAdmin = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4">{issue.subject}</td>
-                      <td className="px-6 py-4">{issue.description}</td>
+                      <td
+                        className="px-6 py-4"
+                        dangerouslySetInnerHTML={{ __html: issue.description }}
+                      />
                       <td className="px-6 py-4 text-sm text-gray-500">
                         {issue.created_at?.split("T")[0]}
                       </td>
@@ -144,6 +156,7 @@ const ReportIssueAdmin = () => {
                             onClick={() => {
                               setIsEdit(true);
                               setCurrentIssue(issue);
+                              setDescription(issue.description);
                               openModal();
                             }}
                             className="p-1 hover:bg-gray-100 rounded-md"
@@ -209,12 +222,7 @@ const ReportIssueAdmin = () => {
               </div>
               <div>
                 <label className="block mb-2">Description</label>
-                <textarea
-                  name="description"
-                  defaultValue={currentIssue?.description}
-                  className="w-full p-2 border rounded h-32 outline-none border-gray-400"
-                  required
-                />
+                <QuillEditor value={description} onChange={setDescription} />
               </div>
               <div className="flex justify-end gap-2">
                 <button
