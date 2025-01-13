@@ -47,8 +47,8 @@ const graphOption = [
   { id: 2, name: "Bar Graph" },
 ];
 const yearOption = [
-  { id: 1, year: 2024 },
-  { id: 2, year: 2025 },
+  { id: 1, year: 2025 },
+  { id: 2, year: 2026 },
 ];
 
 // get monthly rentals
