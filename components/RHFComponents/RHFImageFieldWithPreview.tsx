@@ -46,20 +46,21 @@ const RHFImageFieldWithPreview = <T extends FieldValues>({
           {preview && (
             <Box
               sx={{
-                width: "400px",
-                height: "300px",
+                width: "100%",
+                maxWidth: "400px", // Limit the width
+                height: "auto", // Auto-adjust height
+                aspectRatio: "4 / 3", // Maintain aspect ratio
                 border: "1px solid #ddd",
                 borderRadius: "4px",
                 overflow: "hidden",
-                objectFit: "contain",
               }}
             >
               <Image
                 src={preview}
                 alt="Preview"
                 priority
-                width={500}
-                height={800}
+                width={400}
+                height={300}
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </Box>

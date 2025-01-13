@@ -102,6 +102,11 @@ export const adminSidebarList = [
     //   },
     // ],
   },
+  {
+    _id: 6,
+    title: "Blogs",
+    path: "/admin/blogs",
+  },
   // {
   //   _id: 6,
   //   title: "Reports & Analytics",
