@@ -102,27 +102,27 @@ export const adminSidebarList = [
     //   },
     // ],
   },
-  {
-    _id: 6,
-    title: "Reports & Analytics",
-    subList: [
-      {
-        _id: 1,
-        title: "Rental Reports",
-        path: "/admin/reports/rental-reports",
-      },
-      {
-        _id: 2,
-        title: "Revenue & Payments Reports",
-        path: "/admin/reports/revenue-payments",
-      },
-      {
-        _id: 3,
-        title: "Bike Utilization Reports",
-        path: "/admin/reports/bike-utilization",
-      },
-    ],
-  },
+  // {
+  //   _id: 6,
+  //   title: "Reports & Analytics",
+  //   subList: [
+  //     {
+  //       _id: 1,
+  //       title: "Rental Reports",
+  //       path: "/admin/reports/rental-reports",
+  //     },
+  //     {
+  //       _id: 2,
+  //       title: "Revenue & Payments Reports",
+  //       path: "/admin/reports/revenue-payments",
+  //     },
+  //     {
+  //       _id: 3,
+  //       title: "Bike Utilization Reports",
+  //       path: "/admin/reports/bike-utilization",
+  //     },
+  //   ],
+  // },
   {
     _id: 7,
     title: "Support & Help",
