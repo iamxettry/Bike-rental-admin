@@ -1,14 +1,14 @@
 import React from "react";
 import { Mail, Phone, MessageSquare } from "lucide-react";
 
-function CustomerSupportPage() {
+function CustomerSupport() {
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-6">
         Customer Support
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div className="p-6 bg-blue-50 rounded-lg">
           <Mail className="w-8 h-8 text-blue-600 mb-4" />
           <h3 className="text-lg font-semibold mb-2">Email Support</h3>
@@ -16,10 +16,10 @@ function CustomerSupportPage() {
             Get help via email within 24 hours
           </p>
           <a
-            href="mailto:support@example.com"
+            href="mailto:withmybike@gmail.com"
             className="text-blue-600 hover:text-blue-700 font-medium"
           >
-            support@example.com
+            withmybike@gmail.com
           </a>
         </div>
 
@@ -31,18 +31,18 @@ function CustomerSupportPage() {
             href="tel:1-800-123-4567"
             className="text-green-600 hover:text-green-700 font-medium"
           >
-            1-800-123-4567
+            9812997800
           </a>
         </div>
 
-        <div className="p-6 bg-purple-50 rounded-lg">
+        {/* <div className="p-6 bg-purple-50 rounded-lg">
           <MessageSquare className="w-8 h-8 text-purple-600 mb-4" />
           <h3 className="text-lg font-semibold mb-2">Live Chat</h3>
           <p className="text-gray-600 mb-4">Instant support from our team</p>
           <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
             Start Chat
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className="bg-gray-50 rounded-lg p-6">
@@ -59,4 +59,4 @@ function CustomerSupportPage() {
   );
 }
 
-export default CustomerSupportPage;
+export default CustomerSupport;

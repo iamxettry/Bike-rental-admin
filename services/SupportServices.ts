@@ -52,8 +52,18 @@ const SupportServices = {
   },
 
   // Report Issue Services
-  getReportedIssues: async (): Promise<ApiResponse<ReportIssue[]>> => {
-    return await requests.get("/support/report-issues/");
+  getReportedIssues: async ({
+    search_query,
+    category = "all",
+  }: {
+    search_query?: string;
+    category?: string;
+  }): Promise<ApiResponse<ReportIssue[]>> => {
+    const searchParams = search_query ? `search=${search_query}` : "";
+    const categoryParam = category !== "all" ? `&&category=${category}` : "";
+    return await requests.get(
+      `/support/report-issues/?${searchParams}${categoryParam}`
+    );
   },
   postReportIssue: async (
     data: ReportIssue
