@@ -2,16 +2,18 @@
 import RHFTextField from "@/components/RHFComponents/RHFTextField";
 import React, { useEffect } from "react";
 import { BlogType } from "../Schema/BlogSchema";
-import RHFImageFieldWithPreview from "@/components/RHFComponents/RHFImageFieldWithPreview";
 import { Save, X } from "lucide-react";
 import useBlogSubmit from "@/hooks/useBLogSubmit";
 import { useModal } from "@/hooks/useModalStore";
+import QuillEditor from "@/components/common/QuillEditor";
+import RHFImageFieldWithPreview from "@/components/RHFComponents/RHFImageFieldWithPreview";
 
 const BlogForm = () => {
   const { closeModal } = useModal();
   const {
     watch,
     handleSubmit,
+    setValue,
     formState: { isSubmitting },
   } = useBlogSubmit();
   useEffect(() => {
@@ -19,17 +21,29 @@ const BlogForm = () => {
     return () => sub.unsubscribe();
   }, [watch]);
   return (
-    <div className="bg-white p-4 rounded-md w-[500px] max-h-96 ">
+    <div className="bg-white p-4 rounded-md max-w-3xl mx-auto ">
       <form onSubmit={handleSubmit} className="grid space-y-4 overflow-y-auto ">
-        <RHFTextField<BlogType> name="title" label="Title" />
-        <RHFTextField<BlogType> name="description" label="Description" />
-        <div className="flex flex-col items-start">
+        <div className="grid grid-cols-3 gap-2">
+          <div className="col-span-2 space-y-4 ">
+            <span></span>
+            <RHFTextField<BlogType> name="title" label="Title" />
+            {/* <RHFTextField<BlogType> name="description" label="Description" /> */}
+            {/* image field  */}
+            <div>
+              <QuillEditor
+                value={watch("description")}
+                onChange={(value) => setValue("description", value)}
+              />
+              <p className="text-gray-500">Description</p>
+            </div>
+          </div>
           <RHFImageFieldWithPreview<BlogType>
             name="image"
+            width={200}
+            height={150}
             label="Select Image"
           />
         </div>
-
         <div className="flex justify-end gap-2">
           <button
             type="button"

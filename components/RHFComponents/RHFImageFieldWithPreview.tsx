@@ -7,11 +7,15 @@ import { useModal } from "@/hooks/useModalStore";
 type Props<T extends FieldValues> = {
   name: Path<T>;
   label: string;
+  width?: number;
+  height?: number;
 };
 
 const RHFImageFieldWithPreview = <T extends FieldValues>({
   name,
   label,
+  width = 400, // Default width
+  height = 300, // Default height
 }: Props<T>) => {
   const { control } = useFormContext<T>();
   const { preview, setPreview } = useModal();
@@ -46,10 +50,8 @@ const RHFImageFieldWithPreview = <T extends FieldValues>({
           {preview && (
             <Box
               sx={{
-                width: "100%",
-                maxWidth: "400px", // Limit the width
-                height: "auto", // Auto-adjust height
-                aspectRatio: "4 / 3", // Maintain aspect ratio
+                width: `${width}px`, // Dynamic width
+                height: `${height}px`, // Limit the width
                 border: "1px solid #ddd",
                 borderRadius: "4px",
                 overflow: "hidden",

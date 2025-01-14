@@ -1,48 +1,45 @@
-// components/QuillEditor.tsx
+"use client";
+
 import Quill from "quill";
 import { useEffect, useRef } from "react";
-import "quill/dist/quill.snow.css"; // Import Quill's CSS
+import "quill/dist/quill.snow.css";
 
-// Define toolbar options
 const toolbarOptions = [
-  ["bold", "italic", "underline", "strike"], // toggled buttons
+  ["bold", "italic", "underline", "strike"],
   ["blockquote", "code-block"],
   ["link", "image", "video", "formula"],
-
-  [{ header: 1 }, { header: 2 }], // custom button values
-  [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
-  [{ script: "sub" }, { script: "super" }], // superscript/subscript
-  [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-  [{ direction: "rtl" }], // text direction
-
+  [{ header: 1 }, { header: 2 }],
+  [{ list: "ordered" }, { list: "bullet" }],
+  [{ script: "sub" }, { script: "super" }],
+  [{ indent: "-1" }, { indent: "+1" }],
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-  [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+  [{ color: [] }, { background: [] }],
   [{ font: [] }],
   [{ align: [] }],
-
-  ["clean"], // remove formatting button
+  ["clean"],
 ];
 
-// Define component props
 type QuillEditorProps = {
   value: string;
   onChange: (content: string) => void;
+  readOnly?: boolean;
 };
 
-const QuillEditor: React.FC<QuillEditorProps> = ({ value, onChange }) => {
+const QuillEditor: React.FC<QuillEditorProps> = ({
+  value,
+  onChange,
+  readOnly = false,
+}) => {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const quillRef = useRef<Quill | null>(null);
 
   useEffect(() => {
     if (editorRef.current && !quillRef.current) {
       quillRef.current = new Quill(editorRef.current, {
-        theme: "snow", // or 'bubble'
-        modules: {
-          toolbar: toolbarOptions,
-        },
-        placeholder: "Description...",
-        readOnly: false,
+        theme: "snow",
+        modules: { toolbar: readOnly ? false : toolbarOptions },
+        placeholder: readOnly ? "" : "Write your content here...",
+        readOnly,
       });
 
       quillRef.current.on("text-change", () => {
@@ -51,27 +48,18 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ value, onChange }) => {
         }
       });
     }
-  }, [onChange]);
+  }, [onChange, readOnly]);
 
   useEffect(() => {
     if (quillRef.current && value !== quillRef.current.root.innerHTML) {
-      // Save the cursor position
-      const selection = quillRef.current.getSelection();
-      const cursorPosition = selection ? selection.index : 0;
-
-      quillRef.current.root.innerHTML = value;
-
-      // Restore the cursor position
-      quillRef.current.setSelection(cursorPosition);
+      quillRef.current.clipboard.dangerouslyPasteHTML(value);
     }
   }, [value]);
 
   return (
     <div
       ref={editorRef}
-      style={{
-        height: 100,
-      }}
+      style={{ minHeight: 150, maxHeight: 400, overflowY: "auto" }}
       className="text-black"
     />
   );

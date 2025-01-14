@@ -1,5 +1,6 @@
-import { BlogType } from "@/app/(admin)/admin/blogs/page";
 import configureAxios from "./axiosConfig";
+import { BlogType } from "@/app/Blog/Schema/BlogSchema";
+import { getCookies } from "./getCookies";
 
 const requests = configureAxios();
 
@@ -21,17 +22,24 @@ const BlogService = {
     );
   },
   //   Create blog
-  createBlog: async (data: BlogType) => {
-    return requests.post("/blog/blogs/", data);
+  createBlog: async (data: FormData) => {
+    return requests.post("/blog/blogs/", data, {
+      Authorization: `Bearer ${await getCookies()}`,
+    });
   },
   //   updaate blog
-  updateBlog: async (id: string, data: BlogType) => {
+  updateBlog: async (id: string, data: FormData) => {
     return requests.put(`/blog/blogs/${id}/`, data);
   },
 
   //   delete blog
   deleteBlog: async (id: string) => {
     return requests.delete(`/blog/blogs/${id}/`);
+  },
+
+  //  get author
+  getAuthor: async (id: string) => {
+    return requests.get(`/blog/authors/${id}/`);
   },
 };
 
