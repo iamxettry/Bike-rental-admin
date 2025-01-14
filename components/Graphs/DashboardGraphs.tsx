@@ -40,7 +40,6 @@ import { CheckmarkIcon } from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import GraphServices from "@/services/GraphServices";
 import Loading from "../utils/Loading";
-import { MonthlyRentalsType, HourlyUsageType } from "@/types/common";
 import UserActivityGraph from "./UserActivityGraph";
 const graphOption = [
   { id: 1, name: "Line Graph" },

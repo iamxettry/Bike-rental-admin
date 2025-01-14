@@ -95,6 +95,7 @@ const RentalDdata = () => {
         });
         resolve(response?.message);
       } catch (error) {
+        console.log(error);
         reject("Something went wrong");
       }
     });

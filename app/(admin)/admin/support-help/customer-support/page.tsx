@@ -1,5 +1,5 @@
 import React from "react";
-import { Mail, Phone, MessageSquare } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 function CustomerSupport() {
   return (

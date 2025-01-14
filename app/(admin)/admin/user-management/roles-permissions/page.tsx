@@ -1,15 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Shield,
-  Users,
-  Plus,
-  Edit2,
-  Trash2,
-  X,
-  Check,
-  Save,
-} from "lucide-react";
+import { Shield, Users, Plus, Edit2, Trash2, X } from "lucide-react";
 import Permissions, {
   Permission,
 } from "@/components/userManagement/roles&Permission/Permissions";
@@ -77,15 +68,15 @@ function RolesAndPermissionPage() {
         newGroup.permissions.includes(p.id)
       ),
     };
-    console.log("newGroupWithId", newGroupWithId);
-    const newPromise = new Promise(async (resolve, reject) => {
-      try {
-        const response = await UserServices.createUserRole(newGroupWithId);
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    });
+    // console.log("newGroupWithId", newGroupWithId);
+    // const newPromise = new Promise(async (resolve, reject) => {
+    //   try {
+    //     const response = await UserServices.createUserRole(newGroupWithId);
+    //     console.log(response);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // });
 
     setNewGroup({ name: "", permissions: [] });
     setShowNewGroupForm(false);

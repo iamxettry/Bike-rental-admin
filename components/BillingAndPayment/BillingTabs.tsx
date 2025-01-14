@@ -19,7 +19,7 @@ const extractPaymentData = (date: string) => {
 };
 const BillingTabs = () => {
   const [currentTab, setCurrentTab] = useState("history");
-
+  console.log(currentTab);
   const { data, isLoading: isHistoryPaymentLoading } = useQuery({
     queryFn: async () =>
       await BillingAndPaymentServices.getMonthlyPaymentHistory(),

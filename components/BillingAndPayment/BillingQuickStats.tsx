@@ -4,7 +4,7 @@ import { ArrowUpDown, Download, MoreHorizontal } from "lucide-react";
 import BillingAndPaymentServices from "@/services/BillingAndPaymentServices";
 
 const BillingQuickStats = async () => {
-  let quickStats = await BillingAndPaymentServices.getQuickStats();
+  const quickStats = await BillingAndPaymentServices.getQuickStats();
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <Card>

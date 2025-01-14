@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Pencil, Trash2, Plus, Save, X } from "lucide-react";
+import { Pencil, Trash2, Plus } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button, Input } from "@mui/material";
+import { Button } from "@mui/material";
 import Search from "@/components/common/Search";
 import useBlogSubmit from "@/hooks/useBLogSubmit";
 import { useModal } from "@/hooks/useModalStore";
@@ -31,18 +31,13 @@ export type BlogTypeApi = {
 };
 
 const BlogAdminDashboard = () => {
-  const [authorId, setAuthorId] = useState("");
   const { openModal, closeModal, isModalOpen, setEditId, setPreview } =
     useModal();
   const { searchQuery, setIsLoading, isLoading } = useStore();
   const { setValue, handleDelete, refreshKey } = useBlogSubmit();
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
 
-  const {
-    data: blogs,
-    isFetching,
-    refetch,
-  } = useQuery({
+  const { data: blogs, isFetching } = useQuery({
     queryFn: async () =>
       await BlogService.getBlogs({
         offset: 0,
@@ -62,7 +57,6 @@ const BlogAdminDashboard = () => {
       setPreview(blog.image);
     }
     setEditId(blog.id);
-    setAuthorId(blog.author);
   };
   const handleOpen = () => {
     openModal();

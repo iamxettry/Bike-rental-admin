@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { AlertTriangle, Filter, Trash2, Edit, Plus } from "lucide-react";
+import { Trash2, Edit, Plus } from "lucide-react";
 import SupportServices from "@/services/SupportServices";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "@/components/utils/Loading";

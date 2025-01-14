@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 import BillingQuickStats from "@/components/BillingAndPayment/BillingQuickStats";
 import BillingTabs from "@/components/BillingAndPayment/BillingTabs";

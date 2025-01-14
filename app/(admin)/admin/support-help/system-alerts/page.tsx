@@ -15,32 +15,7 @@ import SupportServices from "@/services/SupportServices";
 import useSystemAlertSubmit from "@/hooks/useSystemAlertSubmit";
 import Loading from "@/components/utils/Loading";
 
-const alerts = [
-  {
-    id: 1,
-    type: "critical",
-    title: "Database Maintenance",
-    message:
-      "Scheduled database maintenance will occur on March 15th from 2-4 AM EST.",
-    timestamp: "2024-03-10T10:00:00Z",
-  },
-  {
-    id: 2,
-    type: "resolved",
-    title: "API Service Restored",
-    message:
-      "The API service interruption has been resolved. All systems are now operational.",
-    timestamp: "2024-03-09T15:30:00Z",
-  },
-  {
-    id: 3,
-    type: "upcoming",
-    title: "System Update",
-    message:
-      "A system update is scheduled for March 20th. No downtime is expected.",
-    timestamp: "2024-03-20T08:00:00Z",
-  },
-];
+
 const getFormatedDateTime = (timestamp: string) => {
   return new Date(timestamp).toLocaleString();
 };
