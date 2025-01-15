@@ -6,7 +6,7 @@ export const bikeSchema = z.object({
   brand: z.string(),
   model: z.string(),
   year: z.number().optional(),
-  color: z.string(),
+  color: z.string().nullable().optional(),
   start: z.enum(["SELF_START_ONLY", "KICK_AND_SELF_START", "KICK_START_ONLY"]), // enum
   engine: z.string(),
   distance: z.string(),
