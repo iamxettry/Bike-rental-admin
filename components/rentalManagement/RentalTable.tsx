@@ -141,7 +141,7 @@ const RentalTable = ({ data, isLoading }: RentalTableProps) => {
                           ID: {rental.id}
                         </div> */}
                             <div className="text-sm text-gray-500">
-                              ${rental.bike_details.price}/day
+                              Rs. {rental.bike_details.price}/day
                             </div>
                           </div>
                         </div>
@@ -178,7 +178,7 @@ const RentalTable = ({ data, isLoading }: RentalTableProps) => {
                           <div className="flex items-center">
                             <DollarSign className="h-4 w-4 text-gray-400 mr-1" />
                             <span className="text-sm text-gray-900">
-                              ${rental.total_amount}
+                              Rs. {rental.total_amount}
                             </span>
                           </div>
                           <span
